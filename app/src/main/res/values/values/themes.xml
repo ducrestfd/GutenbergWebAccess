@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.gutenbergaccess" parent="android:Theme.Material.Light.NoActionBar" />
+        <!-- Base application theme. -->
+        <style name="Theme.App" parent="android:Theme.Material.Light.NoActionBar">
+            <!-- Customize your theme here. -->
+        </style>
+
+        <!-- Splash Screen Theme -->
+        <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+            <!-- Set the splash screen background, animated icon, and animation duration. -->
+            <item name="windowSplashScreenBackground">@color/purple_200</item>
+
+            <!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an
+                 animated drawable. One of these is required. -->
+            <item name="windowSplashScreenAnimatedIcon">@drawable/gutenbergsplashscreen</item>
+            <!-- Required for animated icons -->
+            <!-- <item name="windowSplashScreenAnimationDuration">1000</item> -->
+
+            <!-- Set the theme of the Activity that follows your splash screen. -->
+            <!-- Required. -->
+            <item name="postSplashScreenTheme">@style/Theme.App</item>
+        </style>
+</resources>
