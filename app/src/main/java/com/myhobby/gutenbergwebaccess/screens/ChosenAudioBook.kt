@@ -265,9 +265,9 @@ fun ChosenAudioBook(
         }
     }
 
-    Log.d("ChosenAudioBook", "decoded label: $decodedLabel")
-    Log.d("ChosenAudioBook", "decoded url: $decodedUrl")
-    Log.d("ChosenAudioBook", "textNumber: $textNumber")
+    // Log.d("ChosenAudioBook", "decoded label: $decodedLabel")
+    // Log.d("ChosenAudioBook", "decoded url: $decodedUrl")
+    // Log.d("ChosenAudioBook", "textNumber: $textNumber")
 
     var titleAuthor by remember { mutableStateOf<String?>(null) }
     var justAuthor by remember { mutableStateOf<String?>(null) }
@@ -283,7 +283,7 @@ fun ChosenAudioBook(
     }
 
     justAuthor = titleAuthor?.substringAfterLast("by ")
-    Log.d("ChosenBook", "justAuthor: $justAuthor")
+    // Log.d("ChosenBook", "justAuthor: $justAuthor")
 
 
     val context = LocalContext.current

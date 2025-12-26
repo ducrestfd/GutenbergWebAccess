@@ -152,7 +152,7 @@ fun About(navController: NavController) {
             )
 
             Text(
-                "Release date 2025-11-28 Version 1.0",
+                "Release date 2025-12-17 Version 1.0",
                 style = TextStyle(fontSize = 12.sp, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold)
             )
 

@@ -284,7 +284,7 @@ fun ChosenBook(
 
     justTitle = decodedLabel?.substringBeforeLast("\n")
     justAuthor = decodedLabel?.substringAfterLast("\t")
-    Log.d("ChosenBook", "justTitle: $justTitle, justAuthor: $justAuthor")
+    //Log.d("ChosenBook", "justTitle: $justTitle, justAuthor: $justAuthor")
 
 
     val context = LocalContext.current
@@ -295,7 +295,7 @@ fun ChosenBook(
         DownloadCompletedReceiver(navController)
     }
 
-    Log.d("ChosenBook", "downloadCompletedReceiver 1: $downloadCompletedReceiver")
+    // Log.d("ChosenBook", "downloadCompletedReceiver 1: $downloadCompletedReceiver")
 
     // Effect to register and unregister the receiver
     DisposableEffect(Unit) {
@@ -354,7 +354,7 @@ fun ChosenBook(
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Log.d("ChosenBook", "downloadId in box: $downloadId")
+        //Log.d("ChosenBook", "downloadId in box: $downloadId")
 
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
 

@@ -278,7 +278,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     // Attempt to fall back to the device's default language
                     tts?.setLanguage(Locale.getDefault())
                 } else {
-                    Log.d("TTS", "Language set to: ${locale.displayLanguage}")
+                    // Log.d("TTS", "Language set to: ${locale.displayLanguage}")
                 }
 
                 if (savedState != null) {

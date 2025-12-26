@@ -383,7 +383,7 @@ fun BookChoices(navController: NavController,
                                         val lang = getMetaTagContent(bookFile, "dc.language")
 
                                         // 2. Log the result for debugging
-                                        Log.d("BookChoices", "Detected language for ${bookFile.name}: $lang")
+                                        // Log.d("BookChoices", "Detected language for ${bookFile.name}: $lang")
 
                                         // 3. Encode the file path for navigation
                                         val encodedFilePath = URLEncoder.encode(
