@@ -21,7 +21,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GutenbergAccess"
         android:name="MainApplication"
-        tools:targetApi="34"
+        tools:targetApi="35"
         android:requestLegacyExternalStorage="true">
 
         <activity

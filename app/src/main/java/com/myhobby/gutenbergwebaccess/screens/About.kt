@@ -23,6 +23,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -114,7 +116,7 @@ fun About(navController: NavController) {
             "the Project Gutenberg website of 70,000 plus books to both " +
             "sighted and blind users.  It is provided without charge under the " +
             "agpl-3.0 license.\n\n" +
-            "Copyright (C) 2025 Frank D. Ducrest\n\n" +
+            "Copyright (C) 2026 Frank D. Ducrest\n\n" +
             "This program is free software: you can redistribute it and/or modify " +
             "it under the terms of the GNU Affero General Public License as published " +
             "by the Free Software Foundation, either version 3 of the License, or " +
@@ -125,6 +127,11 @@ fun About(navController: NavController) {
             " GNU Affero General Public License for more details.\n\n" +
             "You should have received a copy of the GNU Affero General Public License " +
             "along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html"
+
+    val trademarkDisclaimer =
+    "Project Gutenberg is a registered trademark of the Project Gutenberg Literary Archive Foundation. " +
+            "This app is not an official Project Gutenberg application, nor is it affiliated with or endorsed by " +
+            "the Foundation."
 
     val emailAddress = "ducrestfd@gmail.com"
     val mailtoUrl = "mailto:$emailAddress"
@@ -142,7 +149,10 @@ fun About(navController: NavController) {
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        val scrollState = rememberScrollState()
+        Column(
+            modifier = Modifier.verticalScroll(scrollState),
+            horizontalAlignment = Alignment.CenterHorizontally) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -152,7 +162,7 @@ fun About(navController: NavController) {
             )
 
             Text(
-                "Release date 2025-12-17 Version 1.0",
+                "Release date 2026-02-08 Version 2.0",
                 style = TextStyle(fontSize = 12.sp, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold)
             )
 
@@ -165,6 +175,12 @@ fun About(navController: NavController) {
             )
 
             Spacer(modifier = Modifier.height(32.dp))
+
+            Text(
+                text = trademarkDisclaimer,
+                style = TextStyle(fontSize = 16.sp))
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             LinkifiedTextModern(
                 text = fullGutenbergAbout,
