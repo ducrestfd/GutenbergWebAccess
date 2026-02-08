@@ -67,7 +67,6 @@ import org.jsoup.Jsoup
 import android.support.v4.media.session.PlaybackStateCompat
 
 
-
 /**
  * Preprocesses a string of text to improve its suitability for Text-to-Speech (TTS) synthesis.
  *
@@ -94,7 +93,6 @@ fun preprocessTextForTTS(text: String): String {
     }
     return processedText
 }
-
 
 
 /**
@@ -283,7 +281,8 @@ fun TextToSpeechBookReader( // Renamed for clarity
 
                 if (savedState != null) {
                     // Apply all saved values from the state object
-                    currentSentenceIndex = if (savedState.chapter >= 0 && savedState.chapter < bookSentences.size) savedState.chapter else 0
+                    currentSentenceIndex =
+                        if (savedState.chapter >= 0 && savedState.chapter < bookSentences.size) savedState.chapter else 0
                     speechRate = savedState.speechRate
                     speechPitch = savedState.speechPitch
 
@@ -428,7 +427,8 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                     currentSentenceIndex,
                                     0,
                                     speechRate,
-                                    speechPitch)
+                                    speechPitch
+                                )
                                 viewModel.saveBookProgress(stateToSave)
 
                                 // Re-call the central playback function for the new sentence.
@@ -475,7 +475,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         // If isPaused is true, it means the stop was triggered by the
                         // onPause callback, and we should preserve that state.
                         //if (!isPaused) {
-                            isSpeaking = false
+                        isSpeaking = false
                         //}
                         // Never set isPaused = false here. Let the Play/Resume button control that.
                     }
@@ -615,20 +615,21 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         //enabled = bookSentences.isNotEmpty()
                         enabled = isTtsInitialized && bookSentences.isNotEmpty() && !isSpeaking,
                     ) {
-                        Text(if (isPaused ) "Resume" else "Play")
+                        Text(if (isPaused) "Resume" else "Play")
                     }
 
                     Spacer(Modifier.width(16.dp))
 
-                    Button(onClick = {
-                        if (isSpeaking) {
-                            // 1. Declare user intent FIRST.
-                            isPaused = true
-                            isSpeaking = false // Speaking will stop.
-                            // 2. Then, execute the action.
-                            tts?.stop()
-                        }
-                    },
+                    Button(
+                        onClick = {
+                            if (isSpeaking) {
+                                // 1. Declare user intent FIRST.
+                                isPaused = true
+                                isSpeaking = false // Speaking will stop.
+                                // 2. Then, execute the action.
+                                tts?.stop()
+                            }
+                        },
                         enabled = isTtsInitialized && isSpeaking && !isPaused,
                     ) {
                         Text("Pause")
@@ -647,7 +648,8 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 // Persist the change in reading position
                                 if (fileName != null) {
                                     // Create a full state object representing the "beginning"
-                                    val stateToSave = BookPlaybackState(fileName, 0, 0, speechRate, speechPitch)
+                                    val stateToSave =
+                                        BookPlaybackState(fileName, 0, 0, speechRate, speechPitch)
                                     viewModel.saveBookProgress(stateToSave)
                                 }
 
@@ -662,56 +664,176 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     }
                 }
 
+                Spacer(Modifier.height(32.dp))
+
+                if (bookSentences.isNotEmpty()) { // Only show if there are sentences
+                    LinearProgressIndicator(
+                        progress = { progress }, // Use the calculated progress
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(
+                                horizontal = 32.dp,
+                                vertical = 16.dp
+                            ),// Give it some horizontal padding
+                        color = MaterialTheme.colorScheme.primary, // Use theme colors
+                        trackColor = MaterialTheme.colorScheme.surfaceVariant // Use theme colors
+                    )
+                }
+
+                val currentProgress = (progress * 100).toInt()
+                Text("Progress: $currentProgress%")
+
                 Spacer(Modifier.height(16.dp))
 
                 Row {
 
                     Button(
                         onClick = {
-                                if (currentSentenceIndex > 0) {
-                                    val prevIndex = currentSentenceIndex - 1
+                            if (currentSentenceIndex - 30 >= 0) {
+                                val prevIndex = currentSentenceIndex - 30
 
-                                    // Save the new position
-                                    val stateToSave = BookPlaybackState(fileName, prevIndex, 0, speechRate, speechPitch)
-                                    viewModel.saveBookProgress(stateToSave)
+                                // Save the new position
+                                val stateToSave = BookPlaybackState(
+                                    fileName,
+                                    prevIndex,
+                                    0,
+                                    speechRate,
+                                    speechPitch
+                                )
+                                viewModel.saveBookProgress(stateToSave)
 
-                                    // Set the new index
-                                    currentSentenceIndex = prevIndex
+                                // Set the new index
+                                currentSentenceIndex = prevIndex
 
-                                    if (isSpeaking || isPaused) {
-                                        startPlayback(true)
-                                    }
-
+                                if (isSpeaking || isPaused) {
+                                    startPlayback(true)
                                 }
+
+                            }
                         },
                         // Enable if we are not on the first sentence.
                         enabled = isTtsInitialized && currentSentenceIndex > 0
                     ) {
-                        Text("Back")
+                        Text("-30")
                     }
-
-                    Spacer(Modifier.width(16.dp))
 
                     Button(
                         onClick = {
-                                if (currentSentenceIndex < bookSentences.size - 1) {
-                                    val nextIndex = currentSentenceIndex + 1
+                            if (currentSentenceIndex - 10 >= 0) {
+                                val prevIndex = currentSentenceIndex - 10
 
-                                    // Save the new position immediately
-                                    val stateToSave = BookPlaybackState(fileName, nextIndex, 0, speechRate, speechPitch)
-                                    viewModel.saveBookProgress(stateToSave)
+                                // Save the new position
+                                val stateToSave = BookPlaybackState(
+                                    fileName,
+                                    prevIndex,
+                                    0,
+                                    speechRate,
+                                    speechPitch
+                                )
+                                viewModel.saveBookProgress(stateToSave)
 
-                                    // Set the new index
-                                    currentSentenceIndex = nextIndex
+                                // Set the new index
+                                currentSentenceIndex = prevIndex
 
-                                    if (isSpeaking || isPaused) {
-                                        startPlayback(true)
-                                    }
+                                if (isSpeaking || isPaused) {
+                                    startPlayback(true)
+                                }
+
+                            }
+                        },
+                        // Enable if we are not on the first sentence.
+                        enabled = isTtsInitialized && currentSentenceIndex > 0
+                    ) {
+                        Text("-10")
+                    }
+
+                    //Spacer(Modifier.width(16.dp))
+
+                    Button(
+                        onClick = {
+                            if (currentSentenceIndex + 10 < bookSentences.size - 1) {
+                                val nextIndex = currentSentenceIndex + 10
+
+                                // Save the new position immediately
+                                val stateToSave = BookPlaybackState(
+                                    fileName,
+                                    nextIndex,
+                                    0,
+                                    speechRate,
+                                    speechPitch
+                                )
+                                viewModel.saveBookProgress(stateToSave)
+
+                                // Set the new index
+                                currentSentenceIndex = nextIndex
+
+                                if (isSpeaking || isPaused) {
+                                    startPlayback(true)
+                                }
                             }
                         },
                         enabled = isTtsInitialized && currentSentenceIndex < bookSentences.size - 1
                     ) {
-                        Text("Forward")
+                        Text("+10")
+                    }
+
+
+                    Button(
+                        onClick = {
+                            if (currentSentenceIndex + 30 < bookSentences.size - 1) {
+                                val nextIndex = currentSentenceIndex + 30
+
+                                // Save the new position immediately
+                                val stateToSave = BookPlaybackState(
+                                    fileName,
+                                    nextIndex,
+                                    0,
+                                    speechRate,
+                                    speechPitch
+                                )
+                                viewModel.saveBookProgress(stateToSave)
+
+                                // Set the new index
+                                currentSentenceIndex = nextIndex
+
+                                if (isSpeaking || isPaused) {
+                                    startPlayback(true)
+                                }
+                            }
+                        },
+                        enabled = isTtsInitialized && currentSentenceIndex < bookSentences.size - 1
+                    ) {
+                        Text("+30")
+                    }
+
+
+                    Button(
+                        onClick = {
+                            if (currentSentenceIndex + 100 < bookSentences.size - 1) {
+                                val nextIndex = currentSentenceIndex + 100
+
+                                // Save the new position immediately
+                                val stateToSave =
+                                    BookPlaybackState(
+                                        fileName,
+                                        nextIndex,
+                                        0,
+                                        speechRate,
+                                        speechPitch
+                                    )
+                                viewModel.saveBookProgress(stateToSave)
+
+                                // Set the new index
+                                currentSentenceIndex = nextIndex
+
+                                if (isSpeaking || isPaused) {
+                                    startPlayback(true)
+                                }
+                            }
+                        },
+                        enabled = isTtsInitialized && currentSentenceIndex < bookSentences.size - 1
+                    ) {
+                        Text("+100")
                     }
                 }
 
@@ -722,9 +844,6 @@ fun TextToSpeechBookReader( // Renamed for clarity
 
                 Spacer(Modifier.height(16.dp))
 
-
-                Text("Rate: ${"%.1f%%".format(speechRate * 100f)}")
-                Spacer(Modifier.height(8.dp))
                 Row {
                     Button(
                         onClick = {
@@ -738,7 +857,13 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 }
 
                                 // 3. Save the new state.
-                                val stateToSave = BookPlaybackState(fileName, currentSentenceIndex, 0, speechRate, speechPitch)
+                                val stateToSave = BookPlaybackState(
+                                    fileName,
+                                    currentSentenceIndex,
+                                    0,
+                                    speechRate,
+                                    speechPitch
+                                )
                                 viewModel.saveBookProgress(stateToSave)
                             }
                         },
@@ -761,7 +886,13 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 }
 
                                 // 3. Save the new state.
-                                val stateToSave = BookPlaybackState(fileName, currentSentenceIndex, 0, speechRate, speechPitch)
+                                val stateToSave = BookPlaybackState(
+                                    fileName,
+                                    currentSentenceIndex,
+                                    0,
+                                    speechRate,
+                                    speechPitch
+                                )
                                 viewModel.saveBookProgress(stateToSave)
                             }
                         },
@@ -788,7 +919,13 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 }
 
                                 // 3. Save the new state.
-                                val stateToSave = BookPlaybackState(fileName, currentSentenceIndex, 0, speechRate, speechPitch)
+                                val stateToSave = BookPlaybackState(
+                                    fileName,
+                                    currentSentenceIndex,
+                                    0,
+                                    speechRate,
+                                    speechPitch
+                                )
                                 viewModel.saveBookProgress(stateToSave)
                             }
                         },
@@ -811,7 +948,13 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 }
 
                                 // 3. Save the new state.
-                                val stateToSave = BookPlaybackState(fileName, currentSentenceIndex, 0, speechRate, speechPitch)
+                                val stateToSave = BookPlaybackState(
+                                    fileName,
+                                    currentSentenceIndex,
+                                    0,
+                                    speechRate,
+                                    speechPitch
+                                )
                                 viewModel.saveBookProgress(stateToSave)
                             }
                         },
@@ -819,23 +962,6 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     ) {
                         Text("Higher")
                     }
-                }
-
-
-                Spacer(Modifier.height(16.dp))
-
-                if (bookSentences.isNotEmpty()) { // Only show if there are sentences
-                    LinearProgressIndicator(
-                        progress = { progress }, // Use the calculated progress
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(
-                                horizontal = 32.dp,
-                                vertical = 16.dp
-                            ),// Give it some horizontal padding
-                        color = MaterialTheme.colorScheme.primary, // Use theme colors
-                        trackColor = MaterialTheme.colorScheme.surfaceVariant // Use theme colors
-                    )
                 }
 
                 Spacer(Modifier.height(192.dp))
