@@ -38,8 +38,18 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType.Companion.Uri
+import com.myhobby.gutenbergwebaccess.R
 import com.myhobby.gutenbergwebaccess.util.PdfViewerScreen
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
+import android.webkit.WebView
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.viewinterop.AndroidView
+
 
 
 /**
@@ -82,6 +92,9 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
             }
         }
     }
+
+    val webView: WebView = WebView(LocalContext.current)
+
 
     Scaffold(
         topBar = {
@@ -217,6 +230,45 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                 ) {
                     Text(text = "About")
                 }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Row {
+                    TextButton(
+                        onClick = {
+                            navController.navigate(NavRoutes.PrivacyPolicy.route)
+                        },
+                        // We can adjust the padding to make it sit tighter with other text
+                        contentPadding = PaddingValues(4.dp)
+                    ) {
+                        Text(
+                            text = "Privacy Policy",
+                            color = Color(0xFF1A73E8), // Standard "Link Blue"
+                            style = TextStyle(
+                                textDecoration = TextDecoration.Underline
+                            )
+                        )
+                    }
+
+
+
+                    TextButton(
+                        onClick = {
+                            navController.navigate(NavRoutes.AccessibilityStatement.route)
+                        },
+                        // We can adjust the padding to make it sit tighter with other text
+                        contentPadding = PaddingValues(4.dp)
+                    ) {
+                        Text(
+                            text = "Accessibility Statement",
+                            color = Color(0xFF1A73E8), // Standard "Link Blue"
+                            style = TextStyle(
+                                textDecoration = TextDecoration.Underline
+                            )
+                        )
+                    }
+                }
+
             }
         }
     }

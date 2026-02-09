@@ -39,11 +39,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.myhobby.gutenbergwebaccess.screens.About
+import com.myhobby.gutenbergwebaccess.screens.AccessibilityStatement
 import com.myhobby.gutenbergwebaccess.screens.BookChoices
 import com.myhobby.gutenbergwebaccess.screens.Browse
 import com.myhobby.gutenbergwebaccess.screens.ChosenBook
 import com.myhobby.gutenbergwebaccess.screens.Home
-import com.myhobby.gutenbergwebaccess.screens.HtmlBookViewer
 import com.myhobby.gutenbergwebaccess.screens.SavedBooks
 import com.myhobby.gutenbergwebaccess.screens.BookListing
 import com.myhobby.gutenbergwebaccess.screens.BrowseSection
@@ -51,10 +51,12 @@ import com.myhobby.gutenbergwebaccess.screens.ChosenAudioBook
 import com.myhobby.gutenbergwebaccess.screens.OggPlayer
 import com.myhobby.gutenbergwebaccess.screens.AudioPlayList
 import com.myhobby.gutenbergwebaccess.screens.DirectResults
+import com.myhobby.gutenbergwebaccess.screens.PrivacyPolicy
 import com.myhobby.gutenbergwebaccess.screens.Settings
 import com.myhobby.gutenbergwebaccess.ui.theme.GutenbergAccessTheme
 import com.myhobby.gutenbergwebaccess.viewmodels.ScrollLocationViewModel
 import com.myhobby.gutenbergwebaccess.screens.TextToSpeechBookReader
+import com.myhobby.gutenbergwebaccess.util.HtmlText
 import com.myhobby.gutenbergwebaccess.viewmodels.AudioLocationViewModel
 import com.myhobby.gutenbergwebaccess.viewmodels.DirectResultsViewModel
 import com.myhobby.gutenbergwebaccess.viewmodels.OggPlaybackViewModel
@@ -265,18 +267,6 @@ fun MainScreen(
             BookChoices(navController = navController, viewModel, oggPlaybackViewModel, book+"/")
         }
 
-        // Defines the route for the HtmlBookViewer screen, with an "encodedFilePath" argument.
-        composable(
-            route = "${NavRoutes.HtmlBookViewer.route}/{encodedFilePath}",
-            arguments = listOf(navArgument("encodedFilePath") { type = NavType.StringType })
-        ) { backStackEntry ->
-            HtmlBookViewer(
-                navController = navController,
-                viewModel = viewModel,
-                encodedFilePath = backStackEntry.arguments?.getString("encodedFilePath")
-            )
-        }
-
         // Defines the route for the About screen.
         composable(NavRoutes.About.route) {
             About(navController = navController)
@@ -344,7 +334,7 @@ fun MainScreen(
             )
         }
 
-        // Defines the rout to the Settings screen.
+        // Defines the route to the Settings screen.
         composable("settings") {
             Settings(
                 navController = navController,
@@ -352,6 +342,17 @@ fun MainScreen(
             )
         }
 
+        composable("privacy_policy") {
+            PrivacyPolicy(
+                navController = navController
+            )
+        }
+
+        composable("accessibility_statement") {
+            AccessibilityStatement(
+                navController = navController
+            )
+        }
 
     }
 }

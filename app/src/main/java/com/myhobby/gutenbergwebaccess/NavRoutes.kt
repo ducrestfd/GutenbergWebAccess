@@ -56,5 +56,12 @@ sealed class NavRoutes(val route: String){
     object AudioPlayList : NavRoutes("audioplaylist")
     object DirectResults: NavRoutes("directresults")
 
+    object PrivacyPolicy: NavRoutes("privacy_policy")
 
+    object AccessibilityStatement: NavRoutes("accessibility_statement")
+
+    object Settings: NavRoutes("settings")
+
+    object HtmlText: NavRoutes("htmltext")
 }
+
