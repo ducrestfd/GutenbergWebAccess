@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -89,6 +89,13 @@ class OggPlaybackViewModel(application: Application) : AndroidViewModel(applicat
     val defaultSpeakingSpeedFlow = settingRepository.defaultSpeakingSpeedFlow
 
     /**
+     * A Flow that emits the user's preferred default font scale.
+     * The UI can collect this to reactively update when the setting changes.
+     * It defaults to 1.0f if no value has been set.
+     */
+    val defaultFontScaleFlow = settingRepository.defaultFontScaleFlow
+
+    /**
      * Saves the new default speaking speed to persistent storage via the SettingsRepository.
      *
      * @param speed The new speed value to save (e.g., 1.0f, 1.5f).
@@ -96,6 +103,17 @@ class OggPlaybackViewModel(application: Application) : AndroidViewModel(applicat
     fun saveDefaultSpeakingSpeed(speed: Float) {
         viewModelScope.launch {
             settingRepository.saveDefaultSpeakingSpeed(speed)
+        }
+    }
+
+    /**
+     * Saves the new default font scale to persistent storage via the SettingsRepository.
+     *
+     * @param scale The new scale value to save (e.g., 1.0f, 1.5f).
+     */
+    fun saveDefaultFontScale(scale: Float) {
+        viewModelScope.launch {
+            settingRepository.saveDefaultFontScale(scale)
         }
     }
 

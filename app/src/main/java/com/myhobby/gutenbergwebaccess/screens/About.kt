@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -45,6 +45,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
+import com.myhobby.gutenbergwebaccess.util.scaled
 
 
 /**
@@ -72,7 +73,7 @@ fun LinkifiedTextModern(text: String, url: String, linkText: String) {
                     style = SpanStyle(
                         color = MaterialTheme.colorScheme.primary,
                         textDecoration = TextDecoration.Underline,
-                        fontSize = 16.sp,
+                        fontSize = 16.sp.scaled,
                         fontWeight = FontWeight.Bold,
                     )
                 )
@@ -88,10 +89,10 @@ fun LinkifiedTextModern(text: String, url: String, linkText: String) {
         Text(
             text = annotatedString,
             style = MaterialTheme.typography.bodyMedium,
-            fontSize = 16.sp,
+            fontSize = 16.sp.scaled,
             fontWeight = FontWeight.Normal,
             textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-            lineHeight = 16.sp
+            lineHeight = 16.sp.scaled
         )
     }
 }
@@ -158,12 +159,12 @@ fun About(navController: NavController) {
 
             Text(
                 "About Gutenberg Web Access",
-                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
             )
 
             Text(
-                "Release date 2026-02-08 Version 2.0",
-                style = TextStyle(fontSize = 12.sp, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold)
+                "Release date 2026-02-13 Version 3.0",
+                style = TextStyle(fontSize = 12.sp.scaled, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -178,7 +179,7 @@ fun About(navController: NavController) {
 
             Text(
                 text = trademarkDisclaimer,
-                style = TextStyle(fontSize = 16.sp))
+                style = TextStyle(fontSize = 16.sp.scaled))
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -196,9 +197,9 @@ fun About(navController: NavController) {
                         "They may be copied, shared or \nopened in your preferred app\n(such as " +
                         "Speechify, Firefox, etc.)",
                 style = MaterialTheme.typography.headlineSmall,
-                fontSize = 16.sp,
+                fontSize = 16.sp.scaled,
                 textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                lineHeight = 16.sp
+                lineHeight = 16.sp.scaled
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -224,7 +225,7 @@ fun About(navController: NavController) {
                     navController.popBackStack()
                 },
             ) {
-                Text(text = "Home")
+                Text("Home", fontSize = 16.sp.scaled)
             }
         }
     }

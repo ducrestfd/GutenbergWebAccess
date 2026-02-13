@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -43,6 +43,7 @@ import androidx.compose.runtime.setValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.myhobby.gutenbergwebaccess.util.formatTimeMillis
+import com.myhobby.gutenbergwebaccess.util.scaled
 import java.io.File
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -178,7 +179,7 @@ fun AudioPlayList(
 
             Text(
                 "Gutenberg Web Access!",
-                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -190,7 +191,7 @@ fun AudioPlayList(
                     },
                     // modifier = Modifier.semantics {contentDescription = "Return to Home Screen"}
                 ) {
-                    Text(text = "Home")
+                    Text(text = "Home", fontSize = 16.sp.scaled)
                 }
 
 
@@ -203,7 +204,7 @@ fun AudioPlayList(
                     },
                     // modifier = Modifier.semantics {contentDescription = "Return to Previous Screen"}
                 ) {
-                    Text(text = "Back")
+                    Text(text = "Back", fontSize = 16.sp.scaled)
                 }
             }
 
@@ -222,7 +223,7 @@ fun AudioPlayList(
                     },
                     // Modifier.semantics {contentDescription = "Continue Chapter ${savedState.chapter} at $formattedPosition"}
                 ) {
-                    Text(text = "Continue Ch. ${savedState.chapter} at $formattedPosition")
+                    Text(text = "Continue Ch. ${savedState.chapter} at $formattedPosition", fontSize = 16.sp.scaled)
                 }
             }
 
@@ -236,9 +237,9 @@ fun AudioPlayList(
 
             Column {
                 if (fileNames == null) {
-                    Text("Checking external storage...")
+                    Text("Checking external storage...", fontSize = 16.sp.scaled)
                 } else if (fileNames!!.isEmpty()) {
-                    Text("No saved books found.")
+                    Text("No saved books found.", fontSize = 16.sp.scaled)
                 } else {
                     LazyColumn (
                         // Option 2: Apply padding only to the LazyColumn
@@ -270,7 +271,7 @@ fun AudioPlayList(
                             ) {
                                 Text(
                                     text = "Chapter " + item.substringBefore(".ogg").substringAfterLast("_"),
-                                    fontSize = 10.sp
+                                    fontSize = 10.sp.scaled
                                 )
                             }
                             Spacer(modifier = Modifier.height(2.dp))

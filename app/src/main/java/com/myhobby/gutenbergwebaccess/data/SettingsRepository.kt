@@ -8,7 +8,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -53,6 +53,8 @@ class SettingsRepository(private val context: Context) {
 
     // Define a key for the default speaking speed. We use floatPreferencesKey for a Float value.
     private val DEFAULT_SPEAKING_SPEED_KEY = floatPreferencesKey("default_speaking_speed")
+    private val DEFAULT_FONT_SCALE_KEY = floatPreferencesKey("default_font_scale")
+
 
     /**
      * A Flow that emits the user's preferred default speaking speed.
@@ -66,6 +68,11 @@ class SettingsRepository(private val context: Context) {
             preferences[DEFAULT_SPEAKING_SPEED_KEY] ?: 1.0f
         }
 
+    val defaultFontScaleFlow: Flow<Float> = context.settingsDataStore.data
+        .map { preferences ->
+            preferences[DEFAULT_FONT_SCALE_KEY] ?: 1.0f
+        }
+
     /**
      * Saves the user's selected default speaking speed to the DataStore.
      * This is a suspend function as DataStore operations are asynchronous.
@@ -75,6 +82,12 @@ class SettingsRepository(private val context: Context) {
     suspend fun saveDefaultSpeakingSpeed(speed: Float) {
         context.settingsDataStore.edit { preferences ->
             preferences[DEFAULT_SPEAKING_SPEED_KEY] = speed
+        }
+    }
+
+    suspend fun saveDefaultFontScale(scale: Float) {
+        context.settingsDataStore.edit { preferences ->
+            preferences[DEFAULT_FONT_SCALE_KEY] = scale
         }
     }
 }

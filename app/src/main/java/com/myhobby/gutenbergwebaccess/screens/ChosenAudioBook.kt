@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -66,6 +66,7 @@ import com.myhobby.gutenbergwebaccess.DownloadCompletedReceiver
 import com.myhobby.gutenbergwebaccess.NavRoutes
 import com.myhobby.gutenbergwebaccess.R
 import com.myhobby.gutenbergwebaccess.util.getMetaTagContent
+import com.myhobby.gutenbergwebaccess.util.scaled
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -358,7 +359,7 @@ fun ChosenAudioBook(
 
             Text(
                 "Gutenberg Web Access!",
-                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -371,7 +372,7 @@ fun ChosenAudioBook(
                         }
                     },
                 ) {
-                    Text(text = "Home")
+                    Text(text = "Home", fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -381,7 +382,7 @@ fun ChosenAudioBook(
                         navController.popBackStack()
                     },
                 ) {
-                    Text(text = "Back")
+                    Text(text = "Back", fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -393,7 +394,7 @@ fun ChosenAudioBook(
                         }
                     },
                 ) {
-                    Text(text = "Saved Books")
+                    Text(text = "Saved Books", fontSize = 16.sp.scaled)
                 }
             }
 
@@ -402,7 +403,7 @@ fun ChosenAudioBook(
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = decodedLabel,
-                    fontSize = 24.sp
+                    fontSize = 24.sp.scaled
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -410,7 +411,7 @@ fun ChosenAudioBook(
                 Text(
                     text = "by ${justAuthor ?: if (justAuthor == null) "Loading..." else "-no author-"}",
                     fontStyle = FontStyle.Italic,
-                    fontSize = 16.sp
+                    fontSize = 16.sp.scaled
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -542,7 +543,7 @@ fun ChosenAudioBook(
                         enabled = downloadIds.value.isEmpty(),
                         // modifier = Modifier.semantics { contentDescription = "Download & Save all parts of the Audio Book" }
                     ) {
-                        Text(text = "Download & Save All Parts")
+                        Text(text = "Download & Save All Parts", fontSize = 16.sp.scaled)
                     }
 
                 }
@@ -552,7 +553,7 @@ fun ChosenAudioBook(
                 Text(
                     text = "Share",
                     fontStyle = FontStyle.Italic,
-                    fontSize = 16.sp
+                    fontSize = 16.sp.scaled
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -570,7 +571,7 @@ fun ChosenAudioBook(
                         contentDescription = "Share Ogg Audio Book Link"
                     }
                 ) {
-                    Text("Audio Link")
+                    Text("Audio Link", fontSize = 16.sp.scaled)
                 }
 
             }

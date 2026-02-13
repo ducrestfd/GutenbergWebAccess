@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -73,6 +73,8 @@ fun Settings(
     // `collectAsState` makes sure the UI recomposes whenever the value changes in the DataStore.
     // The `initial` value of 1.0f is used only until the first value is emitted from the flow.
     val defaultSpeed by oggPlaybackViewModel.defaultSpeakingSpeedFlow.collectAsState(initial = 1.0f)
+    val fontScale by oggPlaybackViewModel.defaultFontScaleFlow.collectAsState(initial = 1.0f)
+
 
     // A formatter to display the speed value nicely (e.g., "1.2x").
     val decimalFormat = DecimalFormat("0")
@@ -172,6 +174,71 @@ fun Settings(
             ) {
                 Text(text = "50% (Slower)")
                 Text(text = "200% (Faster)")
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Text(
+                text = "Font Size",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = "${decimalFormat.format(fontScale * 100)}%",
+                style = MaterialTheme.typography.displaySmall,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Button(
+                    onClick = {
+                        val newScale = (fontScale - 0.1f).coerceAtLeast(0.8f)
+                        oggPlaybackViewModel.saveDefaultFontScale(newScale)
+                    },
+                    enabled = fontScale > 0.8f
+                ) {
+                    Text("-")
+                }
+
+                Slider(
+                    value = fontScale,
+                    onValueChange = { newScale ->
+                        oggPlaybackViewModel.saveDefaultFontScale(newScale)
+                    },
+                    valueRange = 0.8f..2.0f,
+                    steps = 11, // ((2.0 - 0.8) / 0.1) - 1 = 11
+                    modifier = Modifier.weight(1f)
+                )
+
+                Button(
+                    onClick = {
+                        val newScale = (fontScale + 0.1f).coerceAtMost(2.0f)
+                        oggPlaybackViewModel.saveDefaultFontScale(newScale)
+                    },
+                    enabled = fontScale < 2.0f
+                ) {
+                    Text("+")
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(text = "80% (Smaller)")
+                Text(text = "200% (Larger)")
             }
         }
     }

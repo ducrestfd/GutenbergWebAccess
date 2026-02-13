@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -44,6 +44,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.myhobby.gutenbergwebaccess.Link
 import com.myhobby.gutenbergwebaccess.collectSectionHrefs
+import com.myhobby.gutenbergwebaccess.util.scaled
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 import kotlinx.coroutines.launch
@@ -169,7 +170,7 @@ fun BookListing(
                             }
                         },
                     ) {
-                        Text(text = "Home")
+                        Text(text = "Home", fontSize = 16.sp.scaled)
                     }                },
                 navigationIcon = {
                     Button(
@@ -190,7 +191,7 @@ fun BookListing(
                                 contentDescription = null // The text itself provides the description
                             )
                             Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing)) // Standard spacing
-                            Text(text = "Previous")
+                            Text(text = "Previous", fontSize = 16.sp.scaled)
                         }
                     }
                 },
@@ -203,7 +204,7 @@ fun BookListing(
                         enabled = !isLoading, // Disable next if currently loading
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(text = "Next")
+                            Text(text = "Next", fontSize = 16.sp.scaled)
                             Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing)) // Standard spacing
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowForward,
@@ -235,11 +236,11 @@ fun BookListing(
 
                     Text(
                         "Gutenberg Web Access!",
-                        style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                        style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
                     )
                     Text(
                         "${URLDecoder.decode(label, StandardCharsets.UTF_8.toString())}",
-                        style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                        style = TextStyle(fontSize = 16.sp.scaled, fontWeight = FontWeight.Bold)
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -247,7 +248,7 @@ fun BookListing(
                     if (isLoading) {
                         CircularProgressIndicator()
                     } else if (error != null) {
-                        Text("Error: $error")
+                        Text("Error: $error", fontSize = 16.sp.scaled)
                     } else {
                         LazyColumn(
                             contentPadding = PaddingValues(bottom = 48.dp) // Add padding to the bottom
@@ -320,12 +321,12 @@ fun BookListing(
                                                     text = item.label.substring(0, 150)
                                                         .substringBeforeLast("\n") + "...\n" +
                                                             item.label.substringAfterLast("\n"),
-                                                    fontSize = 12.sp
+                                                    fontSize = 12.sp.scaled
                                                 )
                                             } else {
                                                 Text(
                                                     text = item.label,
-                                                    fontSize = 12.sp
+                                                    fontSize = 12.sp.scaled
                                                 )
                                             }
                                         }

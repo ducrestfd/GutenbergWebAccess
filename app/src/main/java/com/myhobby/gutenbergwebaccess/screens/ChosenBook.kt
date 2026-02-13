@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -47,6 +47,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.font.FontStyle
 import androidx.core.content.ContextCompat
+import com.myhobby.gutenbergwebaccess.util.scaled
 import com.myhobby.gutenbergwebaccess.viewmodels.ScrollLocationViewModel
 import androidx.lifecycle.viewModelScope
 import com.myhobby.gutenbergwebaccess.DownloadCompletedReceiver
@@ -362,7 +363,7 @@ fun ChosenBook(
 
             Text(
                 "Gutenberg Web Access!",
-                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -375,7 +376,7 @@ fun ChosenBook(
                         }
                     },
                 ) {
-                    Text(text = "Home")
+                    Text(text = "Home", fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -385,7 +386,7 @@ fun ChosenBook(
                         navController.popBackStack()
                     },
                 ) {
-                    Text(text = "Back")
+                    Text(text = "Back", fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -397,7 +398,7 @@ fun ChosenBook(
                         }
                     },
                 ) {
-                    Text(text = "Saved Books")
+                    Text(text = "Saved Books", fontSize = 16.sp.scaled)
                 }
             }
 
@@ -406,7 +407,7 @@ fun ChosenBook(
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = "$justTitle" ?: if (justTitle == null) "Loading..." else "-no title-",
-                    fontSize = 24.sp
+                    fontSize = 24.sp.scaled
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -414,7 +415,7 @@ fun ChosenBook(
                 Text(
                     text = "by ${justAuthor}" ?: if (justAuthor == null) "Loading..." else "-no author-",
                     fontStyle = FontStyle.Italic,
-                    fontSize = 16.sp
+                    fontSize = 16.sp.scaled
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -462,7 +463,7 @@ fun ChosenBook(
                             }
                         }
                     ) {
-                        Text(text = "Download & Save")
+                        Text(text = "Download & Save", fontSize = 16.sp.scaled)
                     }
                 }
 
@@ -471,7 +472,7 @@ fun ChosenBook(
                 Text(
                     text = "Share",
                     fontStyle = FontStyle.Italic,
-                    fontSize = 16.sp
+                    fontSize = 16.sp.scaled
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -487,7 +488,7 @@ fun ChosenBook(
                             )
                         },
                     ) {
-                        Text("Html Link")
+                        Text("Html Link", fontSize = 16.sp.scaled)
                     }
 
                     Spacer(modifier = Modifier.width(16.dp))
@@ -502,7 +503,7 @@ fun ChosenBook(
                             )
                         },
                     ) {
-                        Text("Text Link")
+                        Text("Text Link", fontSize = 16.sp.scaled)
                     }
 
                 }

@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -60,6 +60,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
+import com.myhobby.gutenbergwebaccess.util.scaled
 import com.myhobby.gutenbergwebaccess.viewmodels.AudioLocationViewModel
 import com.myhobby.gutenbergwebaccess.viewmodels.BookPlaybackState
 import kotlinx.coroutines.launch
@@ -506,7 +507,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                 val stateToSave = BookPlaybackState(
                     folderPath = fileName,
                     chapter = currentSentenceIndex,
-                    position = 0,
+                    position = 0, // Not used for TTS, but required by the data class
                     speechRate = speechRate,
                     speechPitch = speechPitch
                 )
@@ -553,7 +554,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = filePath?.substringAfterLast('/') ?: "Audio Player") },
+                title = { Text(text = filePath?.substringAfterLast('/') ?: "Audio Player", fontSize = 16.sp.scaled) },
                 navigationIcon = {
                     IconButton(
                         onClick = {
@@ -589,7 +590,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
 
                 Text(
                     "Gutenberg Web Access!",
-                    style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                    style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -600,7 +601,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     },
                     // modifier = Modifier.semantics { contentDescription = "Back to Previous Screen" }
                 ) {
-                    Text(text = "Back to Previous Screen")
+                    Text(text = "Back to Previous Screen", fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -615,7 +616,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         //enabled = bookSentences.isNotEmpty()
                         enabled = isTtsInitialized && bookSentences.isNotEmpty() && !isSpeaking,
                     ) {
-                        Text(if (isPaused) "Resume" else "Play")
+                        Text(if (isPaused) "Resume" else "Play", fontSize = 16.sp.scaled)
                     }
 
                     Spacer(Modifier.width(16.dp))
@@ -632,7 +633,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && isSpeaking && !isPaused,
                     ) {
-                        Text("Pause")
+                        Text("Pause", fontSize = 16.sp.scaled)
                     }
 
                     Spacer(Modifier.width(16.dp))
@@ -660,7 +661,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         enabled = isTtsInitialized && (isSpeaking || isPaused), // Enable if TTS is ready and either speaking or paused
                         // modifier = Modifier.semantics { contentDescription = "Pause Speaking and return to Beginning" }
                     ) {
-                        Text("Beginning")
+                        Text("Beginning", fontSize = 16.sp.scaled)
                     }
                 }
 
@@ -681,7 +682,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                 }
 
                 val currentProgress = (progress * 100).toInt()
-                Text("Progress: $currentProgress%")
+                Text("Progress: $currentProgress%", fontSize = 16.sp.scaled)
 
                 Spacer(Modifier.height(16.dp))
 
@@ -714,7 +715,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         // Enable if we are not on the first sentence.
                         enabled = isTtsInitialized && currentSentenceIndex > 0
                     ) {
-                        Text("-30")
+                        Text("-30", fontSize = 16.sp.scaled)
                     }
 
                     Button(
@@ -744,7 +745,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         // Enable if we are not on the first sentence.
                         enabled = isTtsInitialized && currentSentenceIndex > 0
                     ) {
-                        Text("-10")
+                        Text("-10", fontSize = 16.sp.scaled)
                     }
 
                     //Spacer(Modifier.width(16.dp))
@@ -774,7 +775,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && currentSentenceIndex < bookSentences.size - 1
                     ) {
-                        Text("+10")
+                        Text("+10", fontSize = 16.sp.scaled)
                     }
 
 
@@ -803,7 +804,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && currentSentenceIndex < bookSentences.size - 1
                     ) {
-                        Text("+30")
+                        Text("+30", fontSize = 16.sp.scaled)
                     }
 
 
@@ -833,14 +834,14 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && currentSentenceIndex < bookSentences.size - 1
                     ) {
-                        Text("+100")
+                        Text("+100", fontSize = 16.sp.scaled)
                     }
                 }
 
                 Spacer(Modifier.height(16.dp))
 
                 //Text("Rate: ${String.format("%.1f", speechRate)}x")
-                Text("Rate: ${"%.1f%%".format(speechRate * 100f)}")
+                Text("Rate: ${"%.1f%%".format(speechRate * 100f)}", fontSize = 16.sp.scaled)
 
                 Spacer(Modifier.height(16.dp))
 
@@ -869,7 +870,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && speechRate > 0.1f,
                     ) {
-                        Text("Slower")
+                        Text("Slower", fontSize = 16.sp.scaled)
                     }
 
                     Spacer(Modifier.width(16.dp))
@@ -898,13 +899,13 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && speechRate < 3.0f,
                     ) {
-                        Text("Faster")
+                        Text("Faster", fontSize = 16.sp.scaled)
                     }
                 }
 
                 Spacer(Modifier.height(16.dp))
 
-                Text("Pitch: ${"%.1f%%".format(speechPitch * 100f)}")
+                Text("Pitch: ${"%.1f%%".format(speechPitch * 100f)}", fontSize = 16.sp.scaled)
                 Spacer(Modifier.height(8.dp))
                 Row {
                     Button(
@@ -931,7 +932,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && speechPitch > 0.1f,
                     ) {
-                        Text("Lower")
+                        Text("Lower", fontSize = 16.sp.scaled)
                     }
 
                     Spacer(Modifier.width(16.dp))
@@ -960,7 +961,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && speechPitch < 2.0f,
                     ) {
-                        Text("Higher")
+                        Text("Higher", fontSize = 16.sp.scaled)
                     }
                 }
 
@@ -992,7 +993,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     },
                     enabled = isTtsInitialized && (isSpeaking || isPaused), // Enable if TTS is ready and either speaking or paused
                 ) {
-                    Text("Top") // Changed from "Stop" to "Top" to better reflect action of returning to beginning
+                    Text("Top", fontSize = 16.sp.scaled) // Changed from "Stop" to "Top" to better reflect action of returning to beginning
                 }
             }
         }
@@ -1003,11 +1004,11 @@ fun TextToSpeechBookReader( // Renamed for clarity
                 .padding(paddingValues)
         ) {
             if (filePath == null) {
-                Text("No file loaded.")
+                Text("No file loaded.", fontSize = 16.sp.scaled)
             } else if (bookSentences.isEmpty() && isTtsInitialized) {
-                Text("Loading audio content or no speakable content found...")
+                Text("Loading audio content or no speakable content found...", fontSize = 16.sp.scaled)
             } else if (!isTtsInitialized) {
-                Text("TTS engine initializing...")
+                Text("TTS engine initializing...", fontSize = 16.sp.scaled)
             }
         }
     }

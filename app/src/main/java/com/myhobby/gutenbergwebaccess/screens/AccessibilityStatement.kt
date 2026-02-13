@@ -13,11 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
 import androidx.navigation.NavController
 import com.myhobby.gutenbergwebaccess.NavRoutes
 import com.myhobby.gutenbergwebaccess.util.HtmlText
+import com.myhobby.gutenbergwebaccess.util.scaled
 
 @Composable
 fun AccessibilityStatement(navController: NavController) {
@@ -69,7 +71,7 @@ who uses a screen reader.</font></p>
 – needs testing:  </span></b></i>We aim to follow the <b>Web
 Content Accessibility Guidelines (WCAG) 2.2</b> at the AA level as
 our baseline for mobile interface design. We regularly test the app
-using native iOS assistive technologies to ensure a &quot;no-barrier&quot;
+using native Android accessibility assistive technologies to ensure a &quot;no-barrier&quot;
 experience.</font></p>
 <h3 class="western" style="line-height: 114%; margin-top: 0in; margin-bottom: 0.1in">
 <font face="Google Sans, sans-serif">Feedback &amp; Support</font></h3>
@@ -106,7 +108,7 @@ suggestions for improvement, please contact us:</font></p>
                     navController.popBackStack()
                 },
             ) {
-                Text(text = "Home")
+                Text(text = "Home", fontSize = 16.sp.scaled)
             }
 
             Spacer(modifier = Modifier.height(16.dp))

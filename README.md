@@ -1,6 +1,6 @@
 Gutenberg Web Access's raison d'être is to provide simple access to the Gutenberg Project website of 70,000 plus books to both sighted and blind users. It is provided without charge under the agpl-3.0 license.
 
-Copyright (C) 2025 Frank D. Ducrest
+Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or any later version.
 

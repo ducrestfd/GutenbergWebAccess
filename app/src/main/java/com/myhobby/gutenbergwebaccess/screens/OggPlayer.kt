@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -44,6 +44,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.myhobby.gutenbergwebaccess.util.scaled
 import java.io.File
 import java.io.IOException
 import kotlin.math.roundToInt
@@ -416,7 +417,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
         verticalArrangement = Arrangement.Center
     ) {
         if (oggFilePath == null) {
-            Text("No audio file specified.")
+            Text("No audio file specified.", fontSize = 16.sp.scaled)
             // Consider navigating back or showing a more prominent error
             // navController.popBackStack() // Already present, but ensure it's robust
         }
@@ -425,7 +426,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
 
         Text(
             "Gutenberg Web Access!",
-            style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -445,12 +446,12 @@ val updateProgressRunnable: Runnable = object : Runnable {
             },
             // modifier = Modifier.semantics { contentDescription = "Back to Previous Screen" }
         ) {
-            Text(text = "Back to Previous Screen")
+            Text(text = "Back to Previous Screen", fontSize = 16.sp.scaled)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text("Playing: ${File(oggFilePath ?: "").name}", style = MaterialTheme.typography.titleMedium)
+        Text("Playing: ${File(oggFilePath ?: "").name}", style = MaterialTheme.typography.titleMedium, fontSize = 14.sp.scaled)
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -510,8 +511,8 @@ val updateProgressRunnable: Runnable = object : Runnable {
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(formatTimeMillis(currentPosition))
-                Text(formatTimeMillis(totalDuration))
+                Text(formatTimeMillis(currentPosition), fontSize = 12.sp.scaled)
+                Text(formatTimeMillis(totalDuration), fontSize = 12.sp.scaled)
             }
         } else if (oggFilePath != null) {
             LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
@@ -561,7 +562,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
                 // modifier = Modifier.semantics { contentDescription = if (isPlaying) "Pause" else "Play" }
                 //// modifier = Modifier.semantics {contentDescription = if (isThisTheFirstTime() || isPlaying) "Pause" else "Play"}
             ) {
-                Text(if (isThisTheFirstTime() || isPlaying) "Pause" else "Play")
+                Text(if (isThisTheFirstTime() || isPlaying) "Pause" else "Play", fontSize = 16.sp.scaled)
             }
 
             // In the "Beginning" Button
@@ -584,14 +585,14 @@ val updateProgressRunnable: Runnable = object : Runnable {
                 // modifier = Modifier.semantics { contentDescription = "Go to Beginning" }, // Changed for clarity
                 enabled = isMediaPlayerPrepared
             ) {
-                Text("Beginning")
+                Text("Beginning", fontSize = 16.sp.scaled)
             }
 
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text("Speed: ${"%.1f%%".format((currentSpeed) * 100f)}\"")
+        Text("Speed: ${"%.1f%%".format((currentSpeed) * 100f)}\"", fontSize = 16.sp.scaled)
 
         Spacer(modifier = Modifier.height(8.dp))
 
@@ -609,7 +610,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
                 // The button is enabled as long as the speed is above the minimum
                 enabled = isMediaPlayerPrepared && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && currentSpeed > 0.5f
             ) {
-                Text(text = "Slower")
+                Text(text = "Slower", fontSize = 16.sp.scaled)
             }
 
             // Plus Button
@@ -622,7 +623,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
                 // The button is enabled as long as the speed is below the maximum
                 enabled = isMediaPlayerPrepared && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && currentSpeed < 2.0f
             ) {
-                Text(text = "Faster")
+                Text(text = "Faster", fontSize = 16.sp.scaled)
             }
         }
 
@@ -630,7 +631,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
 
         if (!isMediaPlayerPrepared && oggFilePath != null && totalDuration == 0) {
             Spacer(modifier = Modifier.height(8.dp))
-            Text("Loading audio...")
+            Text("Loading audio...", fontSize = 16.sp.scaled)
         }
     }
 }

@@ -9,12 +9,14 @@ import androidx.core.text.HtmlCompat
 
 @Composable
 fun HtmlText(html: String, modifier: Modifier = Modifier) {
+    val fontScale = LocalFontScale.current
+
     AndroidView(
         modifier = modifier,
         factory = { context ->
             // Initialize the traditional TextView
             TextView(context).apply {
-                textSize = 16f
+                textSize = 16f * fontScale
             }
         },
         update = { textView ->
@@ -23,6 +25,7 @@ fun HtmlText(html: String, modifier: Modifier = Modifier) {
                 html,
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
+            textView.textSize = 16f * fontScale
         }
     )
 }

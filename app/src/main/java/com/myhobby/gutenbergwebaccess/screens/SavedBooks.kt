@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -43,6 +43,7 @@ import android.os.Environment
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.myhobby.gutenbergwebaccess.util.scaled
 import com.myhobby.gutenbergwebaccess.viewmodels.ScrollLocationViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -164,7 +165,7 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
 
             Text(
                 "Gutenberg Web Access!",
-                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -177,7 +178,7 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
                         }
                     },
                 ) {
-                    Text(text = "Home")
+                    Text(text = "Home", fontSize = 16.sp.scaled)
                 }
 
 
@@ -188,13 +189,13 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
                         navController.popBackStack()
                     }
                 ) {
-                    Text(text = "Back")
+                    Text(text = "Back", fontSize = 16.sp.scaled)
                 }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text("Saved Books", style = MaterialTheme.typography.headlineSmall)
+            Text("Saved Books", style = MaterialTheme.typography.headlineSmall, fontSize = 20.sp.scaled)
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -213,9 +214,9 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
 
             Column {
                 if (fileNames == null) {
-                    Text("Checking external storage...")
+                    Text("Checking external storage...", fontSize = 16.sp.scaled)
                 } else if (fileNames!!.isEmpty()) {
-                    Text("No saved books found.")
+                    Text("No saved books found.", fontSize = 16.sp.scaled)
                 } else {
                     LazyColumn (
                         // Option 2: Apply padding only to the LazyColumn
@@ -240,7 +241,7 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
                             ) {
                                 Text(
                                     text = virtualFilename.replace("_", " "),
-                                    fontSize = 16.sp
+                                    fontSize = 16.sp.scaled
                                 )
                             }
                             Spacer(modifier = Modifier.height(10.dp))

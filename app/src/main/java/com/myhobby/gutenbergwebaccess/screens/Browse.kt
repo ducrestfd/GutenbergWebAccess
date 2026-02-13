@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.myhobby.gutenbergwebaccess.NavRoutes
+import com.myhobby.gutenbergwebaccess.util.scaled
 
 
 
@@ -68,19 +69,19 @@ fun Browse(navController: NavController, typeOfBrowse: String?) {
             },
                 // modifier = Modifier.semantics {contentDescription = "Return to the home screen"}
             ) {
-                Text(text = "Home")
+                Text(text = "Home", fontSize = 16.sp.scaled)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
                 "Gutenberg Web Access!",
-                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text(text = "Browse by $typeOfBrowse", style = MaterialTheme.typography.headlineSmall)
+            Text(text = "Browse by $typeOfBrowse", style = MaterialTheme.typography.headlineSmall, fontSize = 20.sp.scaled)
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -91,7 +92,7 @@ fun Browse(navController: NavController, typeOfBrowse: String?) {
             },
                 // modifier = Modifier.semantics {contentDescription = "Arts & Culture Books"}
             ) {
-                Text(text = "Arts & Culture")
+                Text(text = "Arts & Culture", fontSize = 16.sp.scaled)
             }
             Button(onClick = {
                 navController.navigate(NavRoutes.BrowseSection.route + "/${typeOfBrowse}/Education & Reference") {
@@ -100,7 +101,7 @@ fun Browse(navController: NavController, typeOfBrowse: String?) {
             },
                 // modifier = Modifier.semantics {contentDescription = "Education & Reference Books"}
             ) {
-                Text(text = "Education & Reference")
+                Text(text = "Education & Reference", fontSize = 16.sp.scaled)
             }
             Button(onClick = {
                 navController.navigate(NavRoutes.BrowseSection.route + "/${typeOfBrowse}/Health & Medicine") {
@@ -109,7 +110,7 @@ fun Browse(navController: NavController, typeOfBrowse: String?) {
             },
                 // modifier = Modifier.semantics {contentDescription = "Health & Medicine Books"}
             ) {
-                Text(text = "Health & Medicine")
+                Text(text = "Health & Medicine", fontSize = 16.sp.scaled)
             }
             Button(onClick = {
                 navController.navigate(NavRoutes.BrowseSection.route + "/${typeOfBrowse}/History") {
@@ -118,7 +119,7 @@ fun Browse(navController: NavController, typeOfBrowse: String?) {
             },
                 // modifier = Modifier.semantics {contentDescription = "History Books"}
             ) {
-                Text(text = "History")
+                Text(text = "History", fontSize = 16.sp.scaled)
             }
             Button(onClick = {
                 navController.navigate(NavRoutes.BrowseSection.route + "/${typeOfBrowse}/Lifestyle & Hobbies") {
@@ -127,7 +128,7 @@ fun Browse(navController: NavController, typeOfBrowse: String?) {
             },
                 // modifier = Modifier.semantics {contentDescription = "Lifestyle & Hobbies Books"}
             ) {
-                Text(text = "Lifestyle & Hobbies")
+                Text(text = "Lifestyle & Hobbies", fontSize = 16.sp.scaled)
             }
             Button(onClick = {
                 navController.navigate(NavRoutes.BrowseSection.route + "/${typeOfBrowse}/Literature") {
@@ -136,7 +137,7 @@ fun Browse(navController: NavController, typeOfBrowse: String?) {
             },
                 // modifier = Modifier.semantics {contentDescription = "Literature Books"}
             ) {
-                Text(text = "Literature")
+                Text(text = "Literature", fontSize = 16.sp.scaled)
             }
             Button(onClick = {
                 navController.navigate(NavRoutes.BrowseSection.route + "/${typeOfBrowse}/Religion & Philosophy") {
@@ -145,7 +146,7 @@ fun Browse(navController: NavController, typeOfBrowse: String?) {
             },
                 // modifier = Modifier.semantics {contentDescription = "Religion & Philosophy Books"}
             ) {
-                Text(text = "Religion & Philosophy")
+                Text(text = "Religion & Philosophy", fontSize = 16.sp.scaled)
             }
             Button(onClick = {
                 navController.navigate(NavRoutes.BrowseSection.route + "/${typeOfBrowse}/Science & Technology") {
@@ -154,7 +155,7 @@ fun Browse(navController: NavController, typeOfBrowse: String?) {
             },
                 // modifier = Modifier.semantics {contentDescription = "Science & Technology Books"}
             ) {
-                Text(text = "Science & Technology")
+                Text(text = "Science & Technology", fontSize = 16.sp.scaled)
             }
             Button(onClick = {
                 navController.navigate(NavRoutes.BrowseSection.route + "/${typeOfBrowse}/Social Sciences & Society") {
@@ -163,7 +164,7 @@ fun Browse(navController: NavController, typeOfBrowse: String?) {
             },
                 // modifier = Modifier.semantics {contentDescription = "Social Sciences & Society Books" }
             ) {
-                Text(text = "Social Sciences & Society")
+                Text(text = "Social Sciences & Society", fontSize = 16.sp.scaled)
             }
 
         }

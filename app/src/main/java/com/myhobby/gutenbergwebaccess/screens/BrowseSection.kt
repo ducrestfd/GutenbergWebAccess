@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -41,6 +41,7 @@ import com.myhobby.gutenbergwebaccess.collectCategoryHrefs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.myhobby.gutenbergwebaccess.Link
+import com.myhobby.gutenbergwebaccess.util.scaled
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -134,7 +135,7 @@ fun BrowseSection(navController: NavController, typeOfBrowse: String?, subSectio
                     },
                     // modifier = Modifier.semantics {contentDescription = "Return to Home Screen"}
                 ) {
-                    Text(text = "Home")
+                    Text(text = "Home", fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -146,7 +147,7 @@ fun BrowseSection(navController: NavController, typeOfBrowse: String?, subSectio
                     },
                     // modifier = Modifier.semantics {contentDescription = "Back to Previous Screen"}
                 ) {
-                    Text(text = "Back")
+                    Text(text = "Back", fontSize = 16.sp.scaled)
                 }
             }
 
@@ -154,15 +155,15 @@ fun BrowseSection(navController: NavController, typeOfBrowse: String?, subSectio
 
             Text(
                 "Gutenberg Web Access!",
-                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
             )
             Text(
                 "${subSection}",
-                style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 16.sp.scaled, fontWeight = FontWeight.Bold)
             )
             Text(
                 "Ordered by ${typeOfBrowse}",
-                style = TextStyle(fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 12.sp.scaled, fontWeight = FontWeight.Bold)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -193,7 +194,7 @@ fun BrowseSection(navController: NavController, typeOfBrowse: String?, subSectio
                     ) {
                         Text(
                             text = item.label,
-                            fontSize = 12.sp
+                            fontSize = 12.sp.scaled
                         )
                     }
 

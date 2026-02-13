@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -40,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import com.myhobby.gutenbergwebaccess.util.scaled
 import com.myhobby.gutenbergwebaccess.viewmodels.ScrollLocationViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -341,11 +342,11 @@ fun BookChoices(navController: NavController,
 
             Text(
                 "Gutenberg Web Access!",
-                style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
             )
             Text(
                 "$book",
-                style = TextStyle(fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                style = TextStyle(fontSize = 16.sp.scaled, fontWeight = FontWeight.Bold)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -431,8 +432,10 @@ fun BookChoices(navController: NavController,
                     },
                     // modifier = Modifier.semantics { contentDescription = "Listen to the book" },
                 ) {
-                    Text(text = "Listen")
+                    Text(text = "Listen", fontSize = 16.sp.scaled)
                 }
+
+                /*
 
                 Spacer(modifier = Modifier.width(16.dp))
 
@@ -486,8 +489,11 @@ fun BookChoices(navController: NavController,
                     // modifier = Modifier.semantics {contentDescription = "Open the book as text"},
                     enabled = isOggFile == false
                 ) {
-                    Text(text = "Text")
+                    Text(text = "Text", fontSize = 16.sp.scaled)
                 }
+
+                
+                 */
 
 
             }
@@ -516,7 +522,7 @@ fun BookChoices(navController: NavController,
                     // modifier = Modifier.semantics {contentDescription = "Share the book as an HTML file"},
                     enabled = isOggFile == false
                 ) {
-                    Text("Share HTML File")
+                    Text("Share HTML File", fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -552,7 +558,7 @@ fun BookChoices(navController: NavController,
                     // modifier = Modifier.semantics {contentDescription = "Open book in Chrome browser"},
                     enabled = isOggFile == false
                 ) {
-                    Text(text = "Open in Chrome")
+                    Text(text = "Open in Chrome", fontSize = 16.sp.scaled)
                 }
 
             }
@@ -570,7 +576,7 @@ fun BookChoices(navController: NavController,
                 //    contentDescription = "Go back to the previous screen"
                 //}
             ) {
-                Text(text = "Back")
+                Text(text = "Back", fontSize = 16.sp.scaled)
             }
 
             Spacer(modifier = Modifier.height(96.dp))
@@ -627,7 +633,7 @@ fun BookChoices(navController: NavController,
                 },
                 // modifier = Modifier.semantics { contentDescription = "Delete the book" }
             ) {
-                Text(text = "Delete")
+                Text(text = "Delete", fontSize = 16.sp.scaled)
             }
         }
     }

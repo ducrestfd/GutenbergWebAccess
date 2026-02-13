@@ -6,7 +6,7 @@ the Gutenberg Project website of 70,000 plus books to both
 sighted and blind users.  It is provided without charge under the
 agpl-3.0 license.
 
-    Copyright (C) 2025 Frank D. Ducrest
+    Copyright (C) 2026 Frank D. Ducrest
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
@@ -22,34 +22,46 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.myhobby.gutenbergwebaccess.NavRoutes
-import com.myhobby.gutenbergwebaccess.viewmodels.DirectResultsViewModel
+import android.webkit.WebView
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType.Companion.Uri
-import com.myhobby.gutenbergwebaccess.R
-import com.myhobby.gutenbergwebaccess.util.PdfViewerScreen
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
-import android.webkit.WebView
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.viewinterop.AndroidView
-
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.myhobby.gutenbergwebaccess.NavRoutes
+import com.myhobby.gutenbergwebaccess.util.scaled
+import com.myhobby.gutenbergwebaccess.viewmodels.DirectResultsViewModel
 
 
 /**
@@ -102,7 +114,7 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                 title = {
                     Text(
                         "Gutenberg Web Access!",
-                        style = TextStyle(fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                        style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
                     )
                 },
                 actions = {
@@ -135,7 +147,7 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                         }
                     },
                 ) {
-                    Text(text = "Saved Books")
+                    Text(text = "Saved Books", fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -155,7 +167,7 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                         }
                     },
                 ) {
-                    Text(text = "Search")
+                    Text(text = "Search", fontSize = 16.sp.scaled)
                 }
 
                 Button(
@@ -165,7 +177,7 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                         }
                     },
                 ) {
-                    Text(text = "Search & Sort by Title")
+                    Text(text = "Search & Sort by Title", fontSize = 16.sp.scaled)
                 }
                 Button(
                     onClick = {
@@ -174,7 +186,7 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                         }
                     },
                 ) {
-                    Text(text = "Search & Sort by Release Date")
+                    Text(text = "Search & Sort by Release Date", fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.height(32.dp))
@@ -186,7 +198,7 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                         }
                     },
                 ) {
-                    Text(text = "Browse by Popularity")
+                    Text(text = "Browse by Popularity", fontSize = 16.sp.scaled)
                 }
 
                 Button(
@@ -196,7 +208,7 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                         }
                     },
                 ) {
-                    Text(text = "Browse by Title")
+                    Text(text = "Browse by Title", fontSize = 16.sp.scaled)
                 }
 
                 Button(
@@ -206,7 +218,7 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                         }
                     },
                 ) {
-                    Text(text = "Browse by Author")
+                    Text(text = "Browse by Author", fontSize = 16.sp.scaled)
                 }
 
                 Button(
@@ -216,7 +228,7 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                         }
                     },
                 ) {
-                    Text(text = "Browse by Release Date")
+                    Text(text = "Browse by Release Date", fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -228,7 +240,7 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                         }
                     },
                 ) {
-                    Text(text = "About")
+                    Text(text = "About", fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -245,7 +257,8 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                             text = "Privacy Policy",
                             color = Color(0xFF1A73E8), // Standard "Link Blue"
                             style = TextStyle(
-                                textDecoration = TextDecoration.Underline
+                                textDecoration = TextDecoration.Underline,
+                                fontSize = 14.sp.scaled
                             )
                         )
                     }
@@ -263,7 +276,8 @@ fun Home(navController: NavController, directResultsViewModel: DirectResultsView
                             text = "Accessibility Statement",
                             color = Color(0xFF1A73E8), // Standard "Link Blue"
                             style = TextStyle(
-                                textDecoration = TextDecoration.Underline
+                                textDecoration = TextDecoration.Underline,
+                                fontSize = 14.sp.scaled
                             )
                         )
                     }
@@ -301,7 +315,7 @@ fun CustomTextField(
         modifier = Modifier.padding(10.dp),
         textStyle = TextStyle(
             fontWeight = FontWeight.Bold,
-            fontSize = 30.sp
+            fontSize = 30.sp.scaled
         ),
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Search // 1. Show a "Search" icon on the keyboard
