@@ -1,4 +1,9 @@
-Gutenberg Web Access's raison d'être is to provide simple access to the Gutenberg Project website of 70,000 plus books to both sighted and blind users. It is provided without charge under the agpl-3.0 license.
+Gutenberg Web Access's raison d'être is to provide simple access to the Gutenberg Project website of
+70,000 plus books to both sighted and blind users. It is provided without charge under the agpl-3.0
+license.
+Users may listen to downloaded audiobooks, choose to have the app speak downloaded ebooks or choose
+to
+use there preferred screen reader to speak downloaded ebooks.
 
 Copyright (C) 2026 Frank D. Ducrest
 
