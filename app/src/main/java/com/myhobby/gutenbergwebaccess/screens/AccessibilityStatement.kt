@@ -14,10 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.text.HtmlCompat
 import androidx.navigation.NavController
-import com.myhobby.gutenbergwebaccess.NavRoutes
 import com.myhobby.gutenbergwebaccess.util.HtmlText
 import com.myhobby.gutenbergwebaccess.util.scaled
 
@@ -43,41 +40,31 @@ who uses a screen reader.</font></p>
 <font face="Google Sans, sans-serif">Key Accessibility Features</font></h3>
 <ul>
 	<li><p style="line-height: 114%; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b>VoiceOver
-	Optimization:</b> <i><b><span style="background: #ffff00">Goal –
-	needs testing:</span></b></i><i><b> </b></i>Every element, button,
-	and image in this app is labeled with descriptive accessibility
-	traits. Navigation follows a logical, predictable flow intended for
+	Optimization:</b><i><b> </b></i>Every element and button in this app is labeled descriptively. 
+    Navigation follows a logical, predictable flow intended for
 	screen reader users.</font></p>
 	<li><p style="line-height: 114%; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b>Text-to-Speech
 	(TTS) Integration:</b> For text-based eBooks, we utilize a
 	specialized speech engine that allows for fine-grained control,
-	including adjustable playback speed and skipping ahead by number of
+	including adjustable playback speed, speaking pitch and skipping forward and backward by a number of
 	sentences.</font></p>
 	<li><p style="line-height: 114%; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b>High
-	Contrast &amp; Large Text:</b><i><b><span style="background: #ffff00">
-	</span></b></i ><i><b><span style="background: #ffff00">Goal –
-	needs testing: </span></b></i>The interface utilizes high-contrast
+	Contrast &amp; Large Text:</b> The interface utilizes high-contrast
 	color ratios and supports <b>Dynamic Type</b>, allowing the app’s
 	layout to scale gracefully with your system-wide font size settings.</font></p>
 	<li><p style="line-height: 114%; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b>Simplified
-	Audio Controls:</b> <i><b><span style="background: #ffff00">Goal –
-	needs testing: </span></b></i>Our audiobook player uses large,
-	easy-to-target touch zones and standard media commands for a
-	seamless listening experience.</font></p>
+	Audio Controls:</b></font></p>
 </ul>
 <h3 class="western" style="line-height: 114%; margin-top: 0in; margin-bottom: 0.1in">
 <font face="Google Sans, sans-serif">Technical Standards</font></h3>
-<p style="line-height: 114%"><font face="Google Sans Text, sans-serif"><i><b><span style="background: #ffff00">Goal
-– needs testing:  </span></b></i>We aim to follow the <b>Web
+<p style="line-height: 114%"><font face="Google Sans Text, sans-serif">We aim to follow the <b>Web
 Content Accessibility Guidelines (WCAG) 2.2</b> at the AA level as
-our baseline for mobile interface design. We regularly test the app
-using native Android accessibility assistive technologies to ensure a &quot;no-barrier&quot;
-experience.</font></p>
+our baseline for mobile interface design.</font></p>
 <h3 class="western" style="line-height: 114%; margin-top: 0in; margin-bottom: 0.1in">
 <font face="Google Sans, sans-serif">Feedback &amp; Support</font></h3>
 <p style="line-height: 114%"><font face="Google Sans Text, sans-serif">Accessibility
-is an ongoing journey. If you encounter a button that isn't labeled
-correctly, a menu that is difficult to navigate, or if you have
+is an ongoing journey. If you encounter a button that isn't 
+correctly descriptive, a menu that is difficult to navigate, some other difficulty or if you have
 suggestions for improvement, please contact us:</font></p>
 <ul>
 	<li><p style="line-height: 114%; border: none; padding: 0in"><font face="Google Sans Text, sans-serif"><b>Email:</b>
