@@ -1,6 +1,5 @@
 package com.myhobby.gutenbergwebaccess.screens
 
-import android.widget.TextView
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,10 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.text.HtmlCompat
 import androidx.navigation.NavController
-import com.myhobby.gutenbergwebaccess.NavRoutes
 import com.myhobby.gutenbergwebaccess.util.HtmlText
 import com.myhobby.gutenbergwebaccess.util.scaled
 
@@ -114,6 +110,7 @@ you have any questions about this Privacy Policy, please contact:</font></p>
 
             HtmlText(html = myHtml)
 
+            Spacer(modifier = Modifier.height(48.dp))
         }
     }
 }

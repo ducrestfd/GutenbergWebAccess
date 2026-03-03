@@ -22,29 +22,33 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material3.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withLink
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.myhobby.gutenbergwebaccess.util.scaled
 
 
@@ -137,7 +141,7 @@ fun About(navController: NavController) {
     val emailAddress = "ducrestfd@gmail.com"
     val mailtoUrl = "mailto:$emailAddress"
     val gnuAddress = "https://www.gnu.org/licenses/agpl-3.0.en.html"
-    val uriHandler = LocalUriHandler.current
+    LocalUriHandler.current
     val fullGutenbergAbout = "To find out more about the Project Gutenberg,\nsee https://www.gutenberg.org/about/"
     val gutenbergAddress = "https://www.gutenberg.org/about/"
     val gitHubAddress = "https://github.com/ducrestfd/GutenbergWebAccess"
@@ -163,7 +167,7 @@ fun About(navController: NavController) {
             )
 
             Text(
-                "Release date 2026-02-13 Version 3.0",
+                "Release date 2026-03-03 Version 3.01",
                 style = TextStyle(fontSize = 12.sp.scaled, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold)
             )
 
@@ -227,6 +231,8 @@ fun About(navController: NavController) {
             ) {
                 Text("Home", fontSize = 16.sp.scaled)
             }
+
+            Spacer(modifier = Modifier.height(48.dp))
         }
     }
 }

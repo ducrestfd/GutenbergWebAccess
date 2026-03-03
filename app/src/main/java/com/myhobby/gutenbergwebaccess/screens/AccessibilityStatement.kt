@@ -102,6 +102,8 @@ suggestions for improvement, please contact us:</font></p>
 
             HtmlText(html = myHtml)
 
+            Spacer(modifier = Modifier.height(48.dp))
+
         }
     }
 }
