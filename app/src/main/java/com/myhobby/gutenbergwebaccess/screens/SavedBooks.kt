@@ -163,14 +163,8 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
 
             Spacer(modifier = Modifier.height(48.dp))
 
-            Text(
-                "Gutenberg Web Access!",
-                style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
             Row() {
+
                 Button(
                     onClick = {
                         navController.navigate(NavRoutes.Home.route) {
@@ -181,7 +175,6 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
                     Text(text = "Home", fontSize = 16.sp.scaled)
                 }
 
-
                 Spacer(modifier = Modifier.width(16.dp))
 
                 Button(
@@ -191,7 +184,15 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
                 ) {
                     Text(text = "Back", fontSize = 16.sp.scaled)
                 }
+
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                "Gutenberg Web Access!",
+                style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 

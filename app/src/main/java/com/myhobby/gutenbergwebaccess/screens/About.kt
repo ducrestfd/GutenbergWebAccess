@@ -159,6 +159,16 @@ fun About(navController: NavController) {
             modifier = Modifier.verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally) {
 
+            Spacer(modifier = Modifier.height(48.dp))
+
+            Button(
+                onClick = {
+                    navController.popBackStack()
+                },
+            ) {
+                Text("Home", fontSize = 16.sp.scaled)
+            }
+
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
@@ -167,7 +177,7 @@ fun About(navController: NavController) {
             )
 
             Text(
-                "Release date 2026-03-03 Version 3.01",
+                "Release date 2026-03-03 Version 3.02",
                 style = TextStyle(fontSize = 12.sp.scaled, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold)
             )
 

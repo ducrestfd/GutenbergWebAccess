@@ -183,7 +183,9 @@ fun BookListing(
                             }
                         },
                         // Disable if on the first page and not allowing popBackStack
-                        enabled = currentIndex > 1 || navController.previousBackStackEntry != null,
+                        //enabled = currentIndex > 1 || navController.previousBackStackEntry != null,
+                        enabled = currentIndex > 1,
+                        //enabled = false,
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(

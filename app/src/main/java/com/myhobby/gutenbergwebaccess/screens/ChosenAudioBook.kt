@@ -357,6 +357,32 @@ fun ChosenAudioBook(
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.height(16.dp))
 
+            Row() {
+
+                Button(
+                    onClick = {
+                        navController.popBackStack()
+                    }
+                ) {
+                    Text(text = "Back", fontSize = 16.sp.scaled)
+                }
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                Button(
+                    onClick = {
+                        navController.navigate(NavRoutes.Home.route) {
+                            launchSingleTop = true
+                        }
+                    },
+                ) {
+                    Text(text = "Home", fontSize = 16.sp.scaled)
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+
             Text(
                 "Gutenberg Web Access!",
                 style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
@@ -364,7 +390,7 @@ fun ChosenAudioBook(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Row() {
+            /*Row() {
                 Button(
                     onClick = {
                         navController.navigate(NavRoutes.Home.route) {
@@ -386,7 +412,7 @@ fun ChosenAudioBook(
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
-
+            */
                 Button(
                     onClick = {
                         navController.navigate(NavRoutes.SavedBooks.route){
@@ -396,7 +422,7 @@ fun ChosenAudioBook(
                 ) {
                     Text(text = "Saved Books", fontSize = 16.sp.scaled)
                 }
-            }
+            //}
 
             Spacer(modifier = Modifier.height(20.dp))
 

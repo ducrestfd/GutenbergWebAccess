@@ -191,7 +191,8 @@ fun DirectResults(
                                 navController.popBackStack()
                             }
                         },
-                        enabled = currentIndex > 1 || navController.previousBackStackEntry != null,
+                        //enabled = currentIndex > 1 || navController.previousBackStackEntry != null,
+                        enabled = currentIndex > 1,
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(

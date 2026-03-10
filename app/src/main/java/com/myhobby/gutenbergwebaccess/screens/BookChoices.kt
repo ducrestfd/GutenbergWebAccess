@@ -338,7 +338,48 @@ fun BookChoices(navController: NavController,
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
-            Spacer(modifier = Modifier.height(48.dp))
+            //Spacer(modifier = Modifier.height(48.dp))
+
+            Row() {
+
+                Button(
+                    onClick = {
+                        navController.navigate(NavRoutes.Home.route) {
+                            launchSingleTop = true
+                        }
+                    },
+                ) {
+                    Text(text = "Home", fontSize = 16.sp.scaled)
+                }
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                Button(
+                    onClick = {
+                        navController.popBackStack()
+                    }
+                ) {
+                    Text(text = "Back", fontSize = 16.sp.scaled)
+                }
+
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            /*
+            Button(
+                onClick = {
+                    navController.popBackStack()
+                },
+                //modifier = Modifier.semantics {
+                //    contentDescription = "Go back to the previous screen"
+                //}
+            ) {
+                Text(text = "Back", fontSize = 16.sp.scaled)
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+            */
 
             Text(
                 "Gutenberg Web Access!",
@@ -568,7 +609,7 @@ fun BookChoices(navController: NavController,
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(
+            /*Button(
                 onClick = {
                     navController.popBackStack()
                 },
@@ -578,6 +619,7 @@ fun BookChoices(navController: NavController,
             ) {
                 Text(text = "Back", fontSize = 16.sp.scaled)
             }
+            */
 
             Spacer(modifier = Modifier.height(96.dp))
 

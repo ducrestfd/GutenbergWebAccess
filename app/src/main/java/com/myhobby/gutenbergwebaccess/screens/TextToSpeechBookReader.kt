@@ -554,8 +554,9 @@ fun TextToSpeechBookReader( // Renamed for clarity
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = filePath?.substringAfterLast('/') ?: "Audio Player", fontSize = 16.sp.scaled) },
-                navigationIcon = {
+                title = { Text(text = " ") }
+                //title = { Text(text = filePath?.substringAfterLast('/') ?: "Audio Player", fontSize = 16.sp.scaled) },
+                /*navigationIcon = {
                     IconButton(
                         onClick = {
                             tts?.stop() // Ensure TTS stops when navigating back
@@ -579,7 +580,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         }) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
-                }
+                }*/
             )
         },
         floatingActionButtonPosition = FabPosition.Center,
@@ -588,21 +589,41 @@ fun TextToSpeechBookReader( // Renamed for clarity
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
+                Button(
+                    onClick = {
+                        tts?.stop() // Ensure TTS stops when navigating back
+                        if (fileName != null && isTtsInitialized) {
+                            // Create the complete state object to save
+                            val stateToSave = BookPlaybackState(
+                                folderPath = fileName,
+                                chapter = currentSentenceIndex,
+                                position = 0, // Not used for TTS, but required by the data class
+                                speechRate = speechRate,
+                                speechPitch = speechPitch
+                            )
+                            // Call the correct ViewModel function
+                            viewModel.saveBookProgress(stateToSave)
+                        }
+                        navController.popBackStack()
+                    },
+                    // modifier = Modifier.semantics { contentDescription = "Back to Previous Screen" }
+                ) {
+                    Text(text = "Back", fontSize = 16.sp.scaled)
+                }
+
+                 Spacer(modifier = Modifier.height(16.dp))
+
                 Text(
                     "Gutenberg Web Access!",
                     style = TextStyle(fontSize = 24.sp.scaled, fontWeight = FontWeight.Bold)
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                //Spacer(modifier = Modifier.height(16.dp))
 
-                Button(
-                    onClick = {
-                        navController.popBackStack()
-                    },
-                    // modifier = Modifier.semantics { contentDescription = "Back to Previous Screen" }
-                ) {
-                    Text(text = "Back to Previous Screen", fontSize = 16.sp.scaled)
-                }
+                Text(text = filePath?.substringAfterLast('/') ?: "Audio Player",
+                    fontSize = 16.sp.scaled,
+                    fontWeight = FontWeight.Bold
+                )
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -967,6 +988,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
 
                 Spacer(Modifier.height(192.dp))
 
+                /*
                 Button(
                     onClick = {
                         if (isTtsInitialized && tts != null && (isSpeaking || isPaused)) {
@@ -994,8 +1016,10 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     enabled = isTtsInitialized && (isSpeaking || isPaused), // Enable if TTS is ready and either speaking or paused
                 ) {
                     Text("Top", fontSize = 16.sp.scaled) // Changed from "Stop" to "Top" to better reflect action of returning to beginning
-                }
+                }*/
             }
+
+
         }
     ) { paddingValues ->
         Column(
