@@ -51,6 +51,7 @@ import kotlin.math.roundToInt
 import com.myhobby.gutenbergwebaccess.viewmodels.OggPlaybackViewModel
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import kotlinx.coroutines.delay
 
 
 
@@ -121,6 +122,10 @@ fun OggPlayer(
     val mediaSession = remember {
         MediaSessionCompat(context, "OggPlayerSession")
     }
+
+    var sleepTimerMinutes by remember { mutableIntStateOf(0) }
+    var isSleepTimerActive by remember { mutableStateOf(false) }
+    var showSleepTimerDialog by remember { mutableStateOf(false) }
 
 /**
  * A [Runnable] object responsible for periodically updating the playback progress.
@@ -364,6 +369,26 @@ val updateProgressRunnable: Runnable = object : Runnable {
             .setState(state, currentPosition.toLong(), currentSpeed)
 
         mediaSession.setPlaybackState(playbackStateBuilder.build())
+    }
+
+    LaunchedEffect(isSleepTimerActive, isPlaying) {
+        if (isSleepTimerActive && isPlaying) {
+            while (sleepTimerMinutes > 0) {
+                delay(60000)
+                if (isSleepTimerActive && isPlaying) {
+                    sleepTimerMinutes -= 1
+                    if (sleepTimerMinutes == 0) {
+                        if (mediaPlayer.isPlaying) {
+                            mediaPlayer.pause()
+                            isPlaying = false
+                        }
+                        isSleepTimerActive = false
+                    }
+                } else {
+                    break
+                }
+            }
+        }
     }
 
 
@@ -633,5 +658,57 @@ val updateProgressRunnable: Runnable = object : Runnable {
             Spacer(modifier = Modifier.height(8.dp))
             Text("Loading audio...", fontSize = 16.sp.scaled)
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        if (isSleepTimerActive && sleepTimerMinutes > 0) {
+            Text("Sleep Timer: $sleepTimerMinutes min left", fontSize = 16.sp.scaled)
+            Spacer(modifier = Modifier.height(8.dp))
+        }
+
+        Button(
+            onClick = { showSleepTimerDialog = true },
+            enabled = isMediaPlayerPrepared
+        ) {
+            Text("Set Sleep Timer", fontSize = 16.sp.scaled)
+        }
+    }
+
+    if (showSleepTimerDialog) {
+        AlertDialog(
+            onDismissRequest = { showSleepTimerDialog = false },
+            title = { Text("Set Sleep Timer", fontSize = 20.sp.scaled) },
+            text = {
+                Column {
+                    listOf(5, 10, 15, 30, 45, 60).forEach { minutes ->
+                        TextButton(
+                            onClick = {
+                                sleepTimerMinutes = minutes
+                                isSleepTimerActive = true
+                                showSleepTimerDialog = false
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("$minutes minutes", fontSize = 16.sp.scaled)
+                        }
+                    }
+                    TextButton(
+                        onClick = {
+                            sleepTimerMinutes = 0
+                            isSleepTimerActive = false
+                            showSleepTimerDialog = false
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Off", fontSize = 16.sp.scaled)
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showSleepTimerDialog = false }) {
+                    Text("Cancel", fontSize = 16.sp.scaled)
+                }
+            }
+        )
     }
 }

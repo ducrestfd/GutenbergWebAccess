@@ -35,6 +35,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -149,6 +150,10 @@ fun TextToSpeechBookReader( // Renamed for clarity
     var currentSentenceIndex by remember { mutableStateOf(0) }
     var bookSentences by remember { mutableStateOf<List<String>>(emptyList()) }
     var isProgressLoaded by remember { mutableStateOf(false) }
+
+    var sleepTimerMinutes by remember { mutableIntStateOf(0) }
+    var isSleepTimerActive by remember { mutableStateOf(false) }
+    var showSleepTimerDialog by remember { mutableStateOf(false) }
     val defaultSpeed by viewModel.defaultSpeakingSpeedFlow.collectAsState(initial = 1.0f)
     var speechRate by remember { mutableStateOf(1.0f) }
     var speechPitch by remember { mutableStateOf(1.0f) }
@@ -360,6 +365,27 @@ fun TextToSpeechBookReader( // Renamed for clarity
         }
     }
 
+
+    LaunchedEffect(isSleepTimerActive, isSpeaking) {
+        if (isSleepTimerActive && isSpeaking) {
+            while (sleepTimerMinutes > 0) {
+                kotlinx.coroutines.delay(60000)
+                if (isSleepTimerActive && isSpeaking) {
+                    sleepTimerMinutes -= 1
+                    if (sleepTimerMinutes == 0) {
+                        if (isSpeaking) {
+                            isSpeaking = false
+                            isPaused = true
+                            tts?.stop()
+                        }
+                        isSleepTimerActive = false
+                    }
+                } else {
+                    break
+                }
+            }
+        }
+    }
 
     // This LaunchedEffect keeps the MediaSession state in sync with the player's state.
     LaunchedEffect(isSpeaking, isPaused) {
@@ -926,6 +952,20 @@ fun TextToSpeechBookReader( // Renamed for clarity
 
                 Spacer(Modifier.height(16.dp))
 
+                if (isSleepTimerActive && sleepTimerMinutes > 0) {
+                    Text("Sleep Timer: $sleepTimerMinutes min left", fontSize = 16.sp.scaled)
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+
+                Button(
+                    onClick = { showSleepTimerDialog = true },
+                    enabled = isTtsInitialized
+                ) {
+                    Text("Set Sleep Timer", fontSize = 16.sp.scaled)
+                }
+
+                Spacer(Modifier.height(16.dp))
+
                 Text("Pitch: ${"%.1f%%".format(speechPitch * 100f)}", fontSize = 16.sp.scaled)
                 Spacer(Modifier.height(8.dp))
                 Row {
@@ -1035,5 +1075,43 @@ fun TextToSpeechBookReader( // Renamed for clarity
                 Text("TTS engine initializing...", fontSize = 16.sp.scaled)
             }
         }
+    }
+
+    if (showSleepTimerDialog) {
+        AlertDialog(
+            onDismissRequest = { showSleepTimerDialog = false },
+            title = { Text("Set Sleep Timer", fontSize = 20.sp.scaled) },
+            text = {
+                Column {
+                    listOf(5, 10, 15, 30, 45, 60).forEach { minutes ->
+                        TextButton(
+                            onClick = {
+                                sleepTimerMinutes = minutes
+                                isSleepTimerActive = true
+                                showSleepTimerDialog = false
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text("$minutes minutes", fontSize = 16.sp.scaled)
+                        }
+                    }
+                    TextButton(
+                        onClick = {
+                            sleepTimerMinutes = 0
+                            isSleepTimerActive = false
+                            showSleepTimerDialog = false
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Off", fontSize = 16.sp.scaled)
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showSleepTimerDialog = false }) {
+                    Text("Cancel", fontSize = 16.sp.scaled)
+                }
+            }
+        )
     }
 }
