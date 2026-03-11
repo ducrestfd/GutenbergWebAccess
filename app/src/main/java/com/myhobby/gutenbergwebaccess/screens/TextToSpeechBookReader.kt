@@ -23,6 +23,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 import android.speech.tts.TextToSpeech
+import android.speech.tts.Voice
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -158,6 +159,10 @@ fun TextToSpeechBookReader( // Renamed for clarity
     var speechRate by remember { mutableStateOf(1.0f) }
     var speechPitch by remember { mutableStateOf(1.0f) }
 
+    var availableVoices by remember { mutableStateOf<List<Voice>>(emptyList()) }
+    var selectedVoice by remember { mutableStateOf<Voice?>(null) }
+    var showVoiceDialog by remember { mutableStateOf(false) }
+
     val context = LocalContext.current
 
     // Calculate progress for the LinearProgressIndicator
@@ -206,6 +211,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                 isPaused = false // We are no longer paused
 
                 // CRITICAL: Always apply the current rate and pitch before speaking.
+                selectedVoice?.let { tts?.setVoice(it) }
                 tts?.setSpeechRate(speechRate)
                 tts?.setPitch(speechPitch)
 
@@ -431,6 +437,9 @@ fun TextToSpeechBookReader( // Renamed for clarity
         tts = TextToSpeech(context) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 isTtsInitialized = true
+
+                availableVoices = tts?.voices?.toList() ?: emptyList()
+                selectedVoice = tts?.voice
 
                 tts?.language = Locale.getDefault()
 
@@ -966,6 +975,15 @@ fun TextToSpeechBookReader( // Renamed for clarity
 
                 Spacer(Modifier.height(16.dp))
 
+                Button(
+                    onClick = { showVoiceDialog = true },
+                    enabled = isTtsInitialized && availableVoices.isNotEmpty()
+                ) {
+                    Text("Change Voice", fontSize = 16.sp.scaled)
+                }
+
+                Spacer(Modifier.height(16.dp))
+
                 Text("Pitch: ${"%.1f%%".format(speechPitch * 100f)}", fontSize = 16.sp.scaled)
                 Spacer(Modifier.height(8.dp))
                 Row {
@@ -1109,6 +1127,40 @@ fun TextToSpeechBookReader( // Renamed for clarity
             },
             confirmButton = {
                 TextButton(onClick = { showSleepTimerDialog = false }) {
+                    Text("Cancel", fontSize = 16.sp.scaled)
+                }
+            }
+        )
+    }
+
+    if (showVoiceDialog) {
+        AlertDialog(
+            onDismissRequest = { showVoiceDialog = false },
+            title = { Text("Select Voice", fontSize = 20.sp.scaled) },
+            text = {
+                val locale = if (!languageCode.isNullOrBlank()) Locale(languageCode) else Locale.US
+                val filteredVoices = availableVoices.filter { it.locale.language == locale.language }
+                
+                Column {
+                    filteredVoices.forEach { voice ->
+                        TextButton(
+                            onClick = {
+                                selectedVoice = voice
+                                tts?.setVoice(voice)
+                                if (isSpeaking) {
+                                    startPlayback(false)
+                                }
+                                showVoiceDialog = false
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(voice.name, fontSize = 16.sp.scaled)
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showVoiceDialog = false }) {
                     Text("Cancel", fontSize = 16.sp.scaled)
                 }
             }
