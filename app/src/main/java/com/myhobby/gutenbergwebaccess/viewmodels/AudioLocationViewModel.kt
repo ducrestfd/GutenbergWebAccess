@@ -125,7 +125,9 @@ class AudioLocationViewModel(application: Application) : AndroidViewModel(applic
                 name = audioLocation.name,
                 sentenceIndex = audioLocation.sentenceIndex,
                 speechRate = audioLocation.speechRate,
-                speechPitch = audioLocation.speechPitch
+                speechPitch = audioLocation.speechPitch,
+                enginePackage = state.enginePackage,
+                voiceName = state.voiceName
             )
         }
     }
@@ -146,7 +148,9 @@ class AudioLocationViewModel(application: Application) : AndroidViewModel(applic
                     folderPath = it.name,
                     chapter = it.sentenceIndex,
                     speechRate = it.speechRate,
-                    speechPitch = it.speechPitch
+                    speechPitch = it.speechPitch,
+                    enginePackage = it.enginePackage,
+                    voiceName = it.voiceName
                 )
             }
         }

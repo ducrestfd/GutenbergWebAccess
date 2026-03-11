@@ -81,9 +81,11 @@ interface AudioLocationDao {
      * @param sentenceIndex The new sentence index to save for the book.
      * @param speechRate The new speech rate to save for the book.
      * @param speechPitch The new speech pitch to save for the book.
+     * @param enginePackage The package name of the TTS engine.
+     * @param voiceName The name of the TTS voice.
      */
-    @Query("UPDATE AudioLocation SET sentenceIndex = :sentenceIndex, speechRate = :speechRate, speechPitch = :speechPitch WHERE name = :name")
-    fun updateAudioLocation(name: String, sentenceIndex: Int, speechRate: Float, speechPitch: Float)
+    @Query("UPDATE AudioLocation SET sentenceIndex = :sentenceIndex, speechRate = :speechRate, speechPitch = :speechPitch, enginePackage = :enginePackage, voiceName = :voiceName WHERE name = :name")
+    fun updateAudioLocation(name: String, sentenceIndex: Int, speechRate: Float, speechPitch: Float, enginePackage: String?, voiceName: String?)
 
 
     /**

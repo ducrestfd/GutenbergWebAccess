@@ -43,7 +43,7 @@ import com.myhobby.gutenbergwebaccess.data.models.AudioLocation
  * @see AudioLocation
  * @see AudioLocationDao
  */
-@Database(entities = [AudioLocation::class], version = 2)
+@Database(entities = [AudioLocation::class], version = 3)
 abstract class AudioLocationDatabase : RoomDatabase() {
 
     /**

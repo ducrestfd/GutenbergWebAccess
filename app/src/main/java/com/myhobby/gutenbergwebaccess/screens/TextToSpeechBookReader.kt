@@ -191,6 +191,19 @@ fun TextToSpeechBookReader( // Renamed for clarity
         MediaSessionCompat(context, "TextToSpeechReaderSession")
     }
 
+    val saveProgress = {
+        val stateToSave = BookPlaybackState(
+            folderPath = fileName,
+            chapter = currentSentenceIndex,
+            position = 0,
+            speechRate = speechRate,
+            speechPitch = speechPitch,
+            enginePackage = selectedEnginePackage,
+            voiceName = selectedVoice?.name
+        )
+        viewModel.saveBookProgress(stateToSave)
+    }
+
     /**
      * The central function for initiating or resuming TTS playback.
      *
@@ -301,6 +314,15 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         if (savedState.chapter >= 0 && savedState.chapter < bookSentences.size) savedState.chapter else 0
                     speechRate = savedState.speechRate
                     speechPitch = savedState.speechPitch
+                    
+                    // Set engine and voice if available in saved state
+                    if (!savedState.enginePackage.isNullOrEmpty() && selectedEnginePackage == null) {
+                        selectedEnginePackage = savedState.enginePackage
+                    }
+                    if (!savedState.voiceName.isNullOrEmpty()) {
+                        selectedVoice = tts?.voices?.find { it.name == savedState.voiceName }
+                        selectedVoice?.let { tts?.setVoice(it) }
+                    }
 
                     // Apply the loaded rate and pitch to the TTS engine immediately
                     tts?.setSpeechRate(speechRate)
@@ -465,14 +487,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                             if (nextIndex < bookSentences.size) {
                                 // There is a next sentence, so update the index and save progress.
                                 currentSentenceIndex = nextIndex
-                                val stateToSave = BookPlaybackState(
-                                    fileName,
-                                    currentSentenceIndex,
-                                    0,
-                                    speechRate,
-                                    speechPitch
-                                )
-                                viewModel.saveBookProgress(stateToSave)
+                                saveProgress()
 
                                 // Re-call the central playback function for the new sentence.
                                 // This ensures the rate and pitch are correctly applied.
@@ -493,14 +508,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 isPaused = false
                                 currentSentenceIndex = 0 // Optional: reset to beginning
                                 // Save the final state (at the beginning)
-                                val finalState = BookPlaybackState(
-                                    fileName,
-                                    0,
-                                    0,
-                                    speechRate,
-                                    speechPitch
-                                )
-                                viewModel.saveBookProgress(finalState)
+                                saveProgress()
                             }
                         }
                     }
@@ -546,14 +554,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
             // --- 4. MODIFIED onDispose TO SAVE FULL STATE ---
             if (filePath != null && isProgressLoaded) {
                 // Save the final state when the user leaves the screen
-                val stateToSave = BookPlaybackState(
-                    folderPath = fileName,
-                    chapter = currentSentenceIndex,
-                    position = 0, // Not used for TTS, but required by the data class
-                    speechRate = speechRate,
-                    speechPitch = speechPitch
-                )
-                viewModel.saveBookProgress(stateToSave)
+                saveProgress()
             }
             mediaSession.release() // Release the media session!
         }
@@ -631,20 +632,13 @@ fun TextToSpeechBookReader( // Renamed for clarity
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
+                Spacer(modifier = Modifier.height(60.dp))
+
                 Button(
                     onClick = {
                         tts?.stop() // Ensure TTS stops when navigating back
                         if (fileName != null && isTtsInitialized) {
-                            // Create the complete state object to save
-                            val stateToSave = BookPlaybackState(
-                                folderPath = fileName,
-                                chapter = currentSentenceIndex,
-                                position = 0, // Not used for TTS, but required by the data class
-                                speechRate = speechRate,
-                                speechPitch = speechPitch
-                            )
-                            // Call the correct ViewModel function
-                            viewModel.saveBookProgress(stateToSave)
+                            saveProgress()
                         }
                         navController.popBackStack()
                     },
@@ -711,10 +705,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
 
                                 // Persist the change in reading position
                                 if (fileName != null) {
-                                    // Create a full state object representing the "beginning"
-                                    val stateToSave =
-                                        BookPlaybackState(fileName, 0, 0, speechRate, speechPitch)
-                                    viewModel.saveBookProgress(stateToSave)
+                                    saveProgress()
                                 }
 
                             } else {
@@ -757,17 +748,8 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 val prevIndex = currentSentenceIndex - 30
 
                                 // Save the new position
-                                val stateToSave = BookPlaybackState(
-                                    fileName,
-                                    prevIndex,
-                                    0,
-                                    speechRate,
-                                    speechPitch
-                                )
-                                viewModel.saveBookProgress(stateToSave)
-
-                                // Set the new index
                                 currentSentenceIndex = prevIndex
+                                saveProgress()
 
                                 if (isSpeaking || isPaused) {
                                     startPlayback(true)
@@ -787,17 +769,8 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 val prevIndex = currentSentenceIndex - 10
 
                                 // Save the new position
-                                val stateToSave = BookPlaybackState(
-                                    fileName,
-                                    prevIndex,
-                                    0,
-                                    speechRate,
-                                    speechPitch
-                                )
-                                viewModel.saveBookProgress(stateToSave)
-
-                                // Set the new index
                                 currentSentenceIndex = prevIndex
+                                saveProgress()
 
                                 if (isSpeaking || isPaused) {
                                     startPlayback(true)
@@ -818,18 +791,9 @@ fun TextToSpeechBookReader( // Renamed for clarity
                             if (currentSentenceIndex + 10 < bookSentences.size - 1) {
                                 val nextIndex = currentSentenceIndex + 10
 
-                                // Save the new position immediately
-                                val stateToSave = BookPlaybackState(
-                                    fileName,
-                                    nextIndex,
-                                    0,
-                                    speechRate,
-                                    speechPitch
-                                )
-                                viewModel.saveBookProgress(stateToSave)
-
-                                // Set the new index
+                                // Save the new position
                                 currentSentenceIndex = nextIndex
+                                saveProgress()
 
                                 if (isSpeaking || isPaused) {
                                     startPlayback(true)
@@ -847,18 +811,9 @@ fun TextToSpeechBookReader( // Renamed for clarity
                             if (currentSentenceIndex + 30 < bookSentences.size - 1) {
                                 val nextIndex = currentSentenceIndex + 30
 
-                                // Save the new position immediately
-                                val stateToSave = BookPlaybackState(
-                                    fileName,
-                                    nextIndex,
-                                    0,
-                                    speechRate,
-                                    speechPitch
-                                )
-                                viewModel.saveBookProgress(stateToSave)
-
-                                // Set the new index
+                                // Save the new position
                                 currentSentenceIndex = nextIndex
+                                saveProgress()
 
                                 if (isSpeaking || isPaused) {
                                     startPlayback(true)
@@ -874,21 +829,8 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     Button(
                         onClick = {
                             if (currentSentenceIndex + 100 < bookSentences.size - 1) {
-                                val nextIndex = currentSentenceIndex + 100
-
-                                // Save the new position immediately
-                                val stateToSave =
-                                    BookPlaybackState(
-                                        fileName,
-                                        nextIndex,
-                                        0,
-                                        speechRate,
-                                        speechPitch
-                                    )
-                                viewModel.saveBookProgress(stateToSave)
-
-                                // Set the new index
-                                currentSentenceIndex = nextIndex
+                                currentSentenceIndex += 100
+                                saveProgress()
 
                                 if (isSpeaking || isPaused) {
                                     startPlayback(true)
@@ -921,14 +863,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 }
 
                                 // 3. Save the new state.
-                                val stateToSave = BookPlaybackState(
-                                    fileName,
-                                    currentSentenceIndex,
-                                    0,
-                                    speechRate,
-                                    speechPitch
-                                )
-                                viewModel.saveBookProgress(stateToSave)
+                                saveProgress()
                             }
                         },
                         enabled = isTtsInitialized && speechRate > 0.1f,
@@ -950,14 +885,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 }
 
                                 // 3. Save the new state.
-                                val stateToSave = BookPlaybackState(
-                                    fileName,
-                                    currentSentenceIndex,
-                                    0,
-                                    speechRate,
-                                    speechPitch
-                                )
-                                viewModel.saveBookProgress(stateToSave)
+                                saveProgress()
                             }
                         },
                         enabled = isTtsInitialized && speechRate < 3.0f,
@@ -1015,14 +943,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 }
 
                                 // 3. Save the new state.
-                                val stateToSave = BookPlaybackState(
-                                    fileName,
-                                    currentSentenceIndex,
-                                    0,
-                                    speechRate,
-                                    speechPitch
-                                )
-                                viewModel.saveBookProgress(stateToSave)
+                                saveProgress()
                             }
                         },
                         enabled = isTtsInitialized && speechPitch > 0.1f,
@@ -1044,14 +965,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 }
 
                                 // 3. Save the new state.
-                                val stateToSave = BookPlaybackState(
-                                    fileName,
-                                    currentSentenceIndex,
-                                    0,
-                                    speechRate,
-                                    speechPitch
-                                )
-                                viewModel.saveBookProgress(stateToSave)
+                                saveProgress()
                             }
                         },
                         enabled = isTtsInitialized && speechPitch < 2.0f,
@@ -1163,6 +1077,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                             onClick = {
                                 selectedVoice = voice
                                 tts?.setVoice(voice)
+                                saveProgress()
                                 if (isSpeaking) {
                                     startPlayback(false)
                                 }
@@ -1195,6 +1110,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                                 if (selectedEnginePackage != engineInfo.name) {
                                     selectedEnginePackage = engineInfo.name
                                     isTtsInitialized = false
+                                    saveProgress()
                                 }
                                 showEngineDialog = false
                             },

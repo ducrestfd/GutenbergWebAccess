@@ -50,13 +50,17 @@ import kotlinx.coroutines.launch
  *           `1.0f` represents normal speed. Defaults to `1.0f`.
  * @property speechPitch The user-defined speech pitch for the Text-to-Speech engine. A value
  *           of `1.0f` represents normal pitch. Defaults to `1.0f`.
+ * @property enginePackage The package name of the preferred Text-to-Speech engine for this book.
+ * @property voiceName The name of the preferred Text-to-Speech voice for this book.
  */
 data class BookPlaybackState(
     val folderPath: String,
     var chapter: Int = 1,
     var position: Int = 0,
     var speechRate: Float = 1.0f,
-    var speechPitch: Float = 1.0f
+    var speechPitch: Float = 1.0f,
+    var enginePackage: String? = null,
+    var voiceName: String? = null
 )
 
 /**

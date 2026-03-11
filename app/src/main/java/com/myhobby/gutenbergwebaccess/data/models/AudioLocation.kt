@@ -38,6 +38,8 @@ import androidx.room.PrimaryKey
  *                         This allows the user to resume listening from where they left off.
  * @property speechRate The playback speed for the Text-to-Speech engine. A value of 1.0f is normal speed.
  * @property speechPitch The pitch for the Text-to-Speech engine. A value of 1.0f is normal pitch.
+ * @property enginePackage The package name of the preferred Text-to-Speech engine for this book.
+ * @property voiceName The name of the preferred Text-to-Speech voice for this book.
  */
 @Entity
 data class AudioLocation (
@@ -46,5 +48,7 @@ data class AudioLocation (
     var name: String,
     var sentenceIndex: Int,
     var speechRate: Float = 1.0f,
-    var speechPitch: Float = 1.0f
+    var speechPitch: Float = 1.0f,
+    var enginePackage: String? = null,
+    var voiceName: String? = null
 )
