@@ -471,7 +471,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
             },
             // modifier = Modifier.semantics { contentDescription = "Back to Previous Screen" }
         ) {
-            Text(text = "Back to Previous Screen", fontSize = 16.sp.scaled)
+            Text(text = "Back", fontSize = 16.sp.scaled)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
