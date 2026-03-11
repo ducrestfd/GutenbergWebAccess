@@ -163,6 +163,10 @@ fun TextToSpeechBookReader( // Renamed for clarity
     var selectedVoice by remember { mutableStateOf<Voice?>(null) }
     var showVoiceDialog by remember { mutableStateOf(false) }
 
+    var availableEngines by remember { mutableStateOf<List<TextToSpeech.EngineInfo>>(emptyList()) }
+    var selectedEnginePackage by remember { mutableStateOf<String?>(null) }
+    var showEngineDialog by remember { mutableStateOf(false) }
+
     val context = LocalContext.current
 
     // Calculate progress for the LinearProgressIndicator
@@ -429,17 +433,20 @@ fun TextToSpeechBookReader( // Renamed for clarity
      * 3.  Saves the final playback state (current sentence, rate, pitch) to persistent storage.
      * 4.  Releases the `mediaSession` to unregister it from the system.
      */
-    DisposableEffect(Unit) {
+    DisposableEffect(selectedEnginePackage) {
 
         mediaSession.setCallback(mediaSessionCallback)
         mediaSession.isActive = true // Activate the session
 
-        tts = TextToSpeech(context) { status ->
+        tts = TextToSpeech(context, { status: Int ->
             if (status == TextToSpeech.SUCCESS) {
                 isTtsInitialized = true
 
                 availableVoices = tts?.voices?.toList() ?: emptyList()
                 selectedVoice = tts?.voice
+
+                // Fetch the list of engines
+                availableEngines = tts?.engines ?: emptyList()
 
                 tts?.language = Locale.getDefault()
 
@@ -517,7 +524,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     }
                 })
             }
-        }
+        }, selectedEnginePackage)
 
 
         /**
@@ -984,6 +991,15 @@ fun TextToSpeechBookReader( // Renamed for clarity
 
                 Spacer(Modifier.height(16.dp))
 
+                Button(
+                    onClick = { showEngineDialog = true },
+                    enabled = isTtsInitialized && availableEngines.isNotEmpty()
+                ) {
+                    Text("Change Engine", fontSize = 16.sp.scaled)
+                }
+
+                Spacer(Modifier.height(16.dp))
+
                 Text("Pitch: ${"%.1f%%".format(speechPitch * 100f)}", fontSize = 16.sp.scaled)
                 Spacer(Modifier.height(8.dp))
                 Row {
@@ -1140,7 +1156,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
             text = {
                 val locale = if (!languageCode.isNullOrBlank()) Locale(languageCode) else Locale.US
                 val filteredVoices = availableVoices.filter { it.locale.language == locale.language }
-                
+
                 Column {
                     filteredVoices.forEach { voice ->
                         TextButton(
@@ -1161,6 +1177,36 @@ fun TextToSpeechBookReader( // Renamed for clarity
             },
             confirmButton = {
                 TextButton(onClick = { showVoiceDialog = false }) {
+                    Text("Cancel", fontSize = 16.sp.scaled)
+                }
+            }
+        )
+    }
+
+    if (showEngineDialog) {
+        AlertDialog(
+            onDismissRequest = { showEngineDialog = false },
+            title = { Text("Select TTS Engine", fontSize = 20.sp.scaled) },
+            text = {
+                Column {
+                    availableEngines.forEach { engineInfo ->
+                        TextButton(
+                            onClick = {
+                                if (selectedEnginePackage != engineInfo.name) {
+                                    selectedEnginePackage = engineInfo.name
+                                    isTtsInitialized = false
+                                }
+                                showEngineDialog = false
+                            },
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(engineInfo.label, fontSize = 16.sp.scaled)
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { showEngineDialog = false }) {
                     Text("Cancel", fontSize = 16.sp.scaled)
                 }
             }
