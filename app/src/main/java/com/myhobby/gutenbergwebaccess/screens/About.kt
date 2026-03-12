@@ -38,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.TextStyle
@@ -45,7 +46,9 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextIndent
 import androidx.compose.ui.text.withLink
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -147,6 +150,39 @@ fun About(navController: NavController) {
     val gitHubAddress = "https://github.com/ducrestfd/GutenbergWebAccess"
     val gitHubText = "Code for this project is available at https://github.com/ducrestfd/GutenbergWebAccess"
 
+    val updateStatusRaw =
+        """
+
+    Updates Completed:
+    • Sleep timers have been added for text-to-speech and audio files. 
+    • Choice of speaking voice has been added to text-to-speech listening.
+    • User choice of TTS engine has been added to text-to-speech listening.
+    • “Home” button in About is visible.
+    • “Home” and “Back” button wording and position are now consistent and placed above the “Gutenberg Web Access” title on sub screens. 
+    • “Previous” button wording is now consistent.
+    • “Previous” button grays out (is disabled) when there is no previous list of files.
+    • Extraneous “Top” button has been removed.
+
+    Future Updates:
+    • Option of using a Braille display. (Have to get one, first, then learn how to use it.)
+    • Include audio / text attributes in titles of search / browse results.  Currently, this is implied by the screen called when an eBook is selected and is only absolutely clear in the saved books listing.  This is a problem because this information is currently only available via the “landing” page of an eBook on the Project Gutenberg site and is not contained in the basic information returned in search results.  Need to find a way to do this without a “double access” for each book listed.      
+        """.trimIndent()
+
+    val bulletIndent = 16.sp.scaled
+    val updateStatus = buildAnnotatedString {
+        updateStatusRaw.lines().forEach { line ->
+            val trimmed = line.trim()
+            if (trimmed.startsWith("•") || trimmed.startsWith("")) {
+                withStyle(style = ParagraphStyle(textIndent = TextIndent(restLine = bulletIndent))) {
+                    append(trimmed)
+                }
+            } else {
+                append(trimmed)
+            }
+            //append("\n")
+        }
+    }
+
 
 
     Box(
@@ -177,7 +213,7 @@ fun About(navController: NavController) {
             )
 
             Text(
-                "Release date 2026-03-11 Version 3.07",
+                "Release date 2026-03-12 Version 3.08",
                 style = TextStyle(fontSize = 12.sp.scaled, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold)
             )
 
@@ -230,6 +266,16 @@ fun About(navController: NavController) {
                 text = fullTextEmail,
                 url = mailtoUrl,
                 linkText = emailAddress
+            )
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            Text(
+                text = updateStatus,
+                style = MaterialTheme.typography.headlineSmall,
+                fontSize = 16.sp.scaled,
+                textAlign = androidx.compose.ui.text.style.TextAlign.Left,
+                lineHeight = 16.sp.scaled
             )
 
             Spacer(modifier = Modifier.height(16.dp))
