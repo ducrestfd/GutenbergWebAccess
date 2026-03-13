@@ -13,8 +13,8 @@ android {
         applicationId = "com.myhobby.gutenbergwebaccess"
         minSdk = 26
         targetSdk = 35
-        versionCode = 2
-        versionName = "1.2"
+        versionCode = 3
+        versionName = "3.09"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

@@ -157,6 +157,8 @@ fun About(navController: NavController) {
     • Sleep timers have been added for text-to-speech and audio files. 
     • Choice of speaking voice has been added to text-to-speech listening.
     • User choice of TTS engine has been added to text-to-speech listening.
+    • Broken scrolling in home, TTS listening and audio listening screens has been corrected.
+    • Broken detection and selection of default voice of the language on first TTS listen has been corrected.
     • “Home” button in About is visible.
     • “Home” and “Back” button wording and position are now consistent and placed above the “Gutenberg Web Access” title on sub screens. 
     • “Previous” button wording is now consistent.
@@ -164,6 +166,8 @@ fun About(navController: NavController) {
     • Extraneous “Top” button has been removed.
 
     Future Updates:
+    • Search by author (very network intensive).
+    . Search by language (very network intensive).
     • Option of using a Braille display. (Have to get one, first, then learn how to use it.)
     • Include audio / text attributes in titles of search / browse results.  Currently, this is implied by the screen called when an eBook is selected and is only absolutely clear in the saved books listing.  This is a problem because this information is currently only available via the “landing” page of an eBook on the Project Gutenberg site and is not contained in the basic information returned in search results.  Need to find a way to do this without a “double access” for each book listed.      
         """.trimIndent()
@@ -213,7 +217,7 @@ fun About(navController: NavController) {
             )
 
             Text(
-                "Release date 2026-03-12 Version 3.08",
+                "Release date 2026-03-13 Version 3.09",
                 style = TextStyle(fontSize = 12.sp.scaled, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold)
             )
 

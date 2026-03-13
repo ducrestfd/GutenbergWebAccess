@@ -40,6 +40,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import android.os.Environment
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -159,7 +161,10 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        //val scrollState = rememberScrollState()
+        Column(
+            //modifier = Modifier.verticalScroll(scrollState),
+            horizontalAlignment = Alignment.CenterHorizontally) {
 
             Spacer(modifier = Modifier.height(48.dp))
 

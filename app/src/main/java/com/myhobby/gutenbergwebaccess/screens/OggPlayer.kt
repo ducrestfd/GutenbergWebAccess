@@ -51,6 +51,8 @@ import kotlin.math.roundToInt
 import com.myhobby.gutenbergwebaccess.viewmodels.OggPlaybackViewModel
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import kotlinx.coroutines.delay
 
 
@@ -434,10 +436,12 @@ val updateProgressRunnable: Runnable = object : Runnable {
         return String.format("%02d:%02d", minutes, seconds)
     }
 
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .verticalScroll(scrollState),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

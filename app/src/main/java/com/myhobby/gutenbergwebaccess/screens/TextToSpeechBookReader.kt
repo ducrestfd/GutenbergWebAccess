@@ -68,6 +68,8 @@ import com.myhobby.gutenbergwebaccess.viewmodels.BookPlaybackState
 import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 import android.support.v4.media.session.PlaybackStateCompat
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 
 /**
@@ -287,19 +289,21 @@ fun TextToSpeechBookReader( // Renamed for clarity
      * interpret user actions, such as converting a two-finger double-tap into the appropriate
      * `onPlay()` or `onPause()` command.
      */
-    LaunchedEffect(key1 = filePath, key2 = isTtsInitialized) {
-        if (filePath != null && isTtsInitialized && !isProgressLoaded) {
+    LaunchedEffect(key1 = filePath, key2 = isTtsInitialized, key3 = selectedEnginePackage) {
+        if (filePath != null && isTtsInitialized) {
             viewModel.viewModelScope.launch {
                 // Fetch the complete playback state object, not just an Int
                 val savedState: BookPlaybackState? =
                     viewModel.getBookProgressAsync(fileName).await()
 
-                val locale = if (!languageCode.isNullOrBlank())
+                val locale = if (!languageCode.isNullOrBlank()) {
                     Locale(languageCode)
-                else
+                    //Log.d("tts language code: ","language code: /(languageCode)")
+                } else
                     Locale.US
+                //Log.d("tts locale: ","locale: /(locale)")
 
-                val result = tts?.setLanguage(locale)
+                val result = tts?.setLanguage(locale as Locale?)
                 if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                     Log.e("TTS", "Language '$languageCode' not supported. Falling back to default.")
                     // Attempt to fall back to the device's default language
@@ -320,8 +324,15 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         selectedEnginePackage = savedState.enginePackage
                     }
                     if (!savedState.voiceName.isNullOrEmpty()) {
-                        selectedVoice = tts?.voices?.find { it.name == savedState.voiceName }
-                        selectedVoice?.let { tts?.setVoice(it) }
+                        val voice = tts?.voices?.find { it.name == savedState.voiceName }
+                        if (voice != null) {
+                            selectedVoice = voice
+                            tts?.setVoice(voice)
+                        } else {
+                            selectedVoice = tts?.voice
+                        }
+                    } else {
+                        selectedVoice = tts?.voice
                     }
 
                     // Apply the loaded rate and pitch to the TTS engine immediately
@@ -333,6 +344,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     // --- THIS IS THE FIX ---
                     speechRate = defaultSpeed // Use the default speed from settings
                     speechPitch = 1.0f
+                    selectedVoice = tts?.voice
 
                     // Also apply this default to the TTS engine
                     tts?.setSpeechRate(speechRate)
@@ -628,7 +640,9 @@ fun TextToSpeechBookReader( // Renamed for clarity
         },
         floatingActionButtonPosition = FabPosition.Center,
         floatingActionButton = {
+            val scrollState = rememberScrollState()
             Column(
+                modifier = Modifier.verticalScroll(scrollState),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 

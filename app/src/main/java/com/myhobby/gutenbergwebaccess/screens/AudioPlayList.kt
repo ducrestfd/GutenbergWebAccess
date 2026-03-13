@@ -38,6 +38,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import android.os.Environment
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.Dispatchers
@@ -172,8 +174,11 @@ fun AudioPlayList(
             .fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
+        val scrollState = rememberScrollState()
+        Column(
 
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            modifier = Modifier.verticalScroll(scrollState),
+            horizontalAlignment = Alignment.CenterHorizontally) {
 
             Spacer(modifier = Modifier.height(48.dp))
 
