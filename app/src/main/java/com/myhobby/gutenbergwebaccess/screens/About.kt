@@ -166,8 +166,11 @@ fun About(navController: NavController) {
     • Extraneous “Top” button has been removed.
 
     Future Updates:
-    • Search by author (very network intensive).
-    . Search by language (very network intensive).
+    • Check for internet connection to avoid infinite waite. 
+    • Move updates completed and future updates to a what's new screen.
+    • Verify / facilitate side-loading of ebooks.
+    • Search by author (very network intensive, need to find a way).
+    . Search by language (very network intensive, need to find a way).
     • Option of using a Braille display. (Have to get one, first, then learn how to use it.)
     • Include audio / text attributes in titles of search / browse results.  Currently, this is implied by the screen called when an eBook is selected and is only absolutely clear in the saved books listing.  This is a problem because this information is currently only available via the “landing” page of an eBook on the Project Gutenberg site and is not contained in the basic information returned in search results.  Need to find a way to do this without a “double access” for each book listed.      
         """.trimIndent()
@@ -217,7 +220,7 @@ fun About(navController: NavController) {
             )
 
             Text(
-                "Release date 2026-03-13 Version 3.09",
+                "Release date 2026-03-15 Version 3.10",
                 style = TextStyle(fontSize = 12.sp.scaled, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold)
             )
 
