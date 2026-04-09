@@ -1,0 +1,4 @@
+Gutenberg Web Access is an open-source client designed to bring the vast library of Project Gutenberg to your mobile device. Streamline your reading experience with a focus on accessibility and ease of use.
+<b>Key Features:</b>
+<ul> <li><b>Extensive Catalog:</b> Access over 70,000 free eBooks in the public domain.</li> <li><b>Audiobook Support:</b> Built-in player for M4B and audio-based eBooks.</li> <li><b>Text-to-Speech:</b> Listen to any eBook using your device's native TTS engine.</li> <li><b>Offline Reading:</b> Download books directly to your device for reading anytime, anywhere.</li> <li><b>Clean Interface:</b> A distraction-free environment optimized for book discovery.</li> </ul>
+This app is dedicated to the spirit of Project Gutenberg—making literature accessible to all. It contains no ads, no tracking, and uses strictly open-source components.

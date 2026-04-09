@@ -1,0 +1,5 @@
+• Third release of Gutenberg Web Access. 
+• Browse and search the Project Gutenberg catalog. 
+• Integrated Audio Player for M4B files. 
+• Native Text-to-Speech support for all text-based eBooks. 
+• Download management for offline access.
