@@ -201,10 +201,6 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text("Saved Books", style = MaterialTheme.typography.headlineSmall, fontSize = 20.sp.scaled)
-
-            Spacer(modifier = Modifier.height(16.dp))
-
 
             // Key the LaunchedEffect to the current route.
             // This ensures it re-runs when you navigate back to this screen.
@@ -216,6 +212,13 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
                     }
                 }
             }
+
+
+            Text("${fileNames?.size} Saved Books", style = MaterialTheme.typography.headlineSmall, fontSize = 20.sp.scaled)
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+
 
 
             Column {

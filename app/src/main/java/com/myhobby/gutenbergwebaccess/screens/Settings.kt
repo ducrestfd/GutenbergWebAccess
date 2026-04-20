@@ -179,7 +179,7 @@ fun Settings(
             Spacer(modifier = Modifier.height(32.dp))
 
             Text(
-                text = "Font Size",
+                text = "Default Font Size",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold
             )
