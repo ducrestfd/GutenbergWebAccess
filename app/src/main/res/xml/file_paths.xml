@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- For files in Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/Gutenbergaccess" -->
-    <external-path name="external_downloads" path="Download/Gutenbergwebaccess/" />
+    <!-- For files in Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/gutenberglisten" -->
+    <external-path name="external_downloads" path="Download/gutenberglisten/" />
     <!-- You might need other paths depending on where else you store files -->
     <!-- Example for app-specific external storage: -->
     <!-- <external-files-path name="my_images" path="Pictures/" /> -->
@@ -17,10 +17,10 @@
 
     <!-- Example: Sharing files from external storage (scoped to your app's directory) -->
     <!-- For public directories like Downloads, you'd typically use external-files-path
-    <external-files-path name="my_external_files" path="Download/Gutenbergaccess/" /> -->
+    <external-files-path name="my_external_files" path="Download/Gutenberglisten/" /> -->
 
     <!-- If you are trying to share from the public Downloads directory as you mentioned
-         for "Downloads/Gutenbergaccess", this gets more complex with modern Android
+         for "Downloads/gutenberlisten", this gets more complex with modern Android
          storage restrictions. Ideally, your app manages files in its own directories.
          If they are truly in the public Downloads, you might need to copy them to
          an app-specific cache dir first for sharing via FileProvider, or the receiving
@@ -28,10 +28,10 @@
          app cannot grant directly for ACTION_SEND).
 
          For files your app creates and stores in its own designated public directory like
-         `Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/Gutenbergaccess"`,
+         `Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/Gutenberglisten"`,
          you might use: -->
 
-        <external-path name="my_downloads" path="Download/Gutenberwebgaccess/" />
+        <external-path name="my_downloads" path="Download/gutenberglisten/" />
         <!-- Or more broadly if needed, but be specific for security -->
         <!-- <external-path name="external_files" path="." /> -->
 

@@ -1,10 +1,4 @@
-Gutenberg Web Access's raison d'être is to provide simple access to the Gutenberg Project website of
-70,000 plus books to both sighted and blind users.
-Users may listen to downloaded audiobooks, choose to have the app speak downloaded ebooks or choose
-to
-use there preferred screen reader to speak downloaded ebooks. It is provided without charge under
-the agpl-3.0
-license.
+Gutenberg Listen's raison d'être is to provide simple access to the Gutenberg Project website of 70,000 plus books to both sighted and blind users. Users may listen to downloaded audiobooks, choose to have the app speak downloaded ebooks or choose to use there preferred screen reader to speak downloaded ebooks. It is provided without charge under the agpl-3.0 license.
 
 Copyright (C) 2026 Frank D. Ducrest
 
@@ -15,15 +9,12 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 See https://www.gnu.org/licenses/agpl-3.0.en.html for a copy of the GNU Affero General Public
 License.
 
-Project Gutenberg is a registered trademark of the Project Gutenberg Literary Archive Foundation.
-This app is not an official Project Gutenberg application, nor is it affiliated with or endorsed by
+Project Gutenberg is a registered trademark of the Project Gutenberg Literary Archive Foundation. This app is not an official Project Gutenberg application, nor is it affiliated with or endorsed by
 the Foundation.
 
 To find out more about the Project Gutenberg, see https://gutenberg.org/about/
 
-All ebooks and audiobooks downloaded by this app are stored on your device. The app collections no
-personal data and requires no login. No tracking or analytics are used. Note that your device will
-connect to Project Gutenberg's servers to fetch files.
+All ebooks and audiobooks downloaded by this app are stored on your device. The app collections no personal data and requires no login. No tracking or analytics are used. Note that your device will connect to Project Gutenberg's servers to fetch files.
 
 Questions about the app or its contents, should be directed to ducrestfd@gmail.com
 

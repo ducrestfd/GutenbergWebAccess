@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.myhobby.gutenbergwebaccess"
+    namespace = "com.myhobby.gutenberglisten"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.myhobby.gutenbergwebaccess"
+        applicationId = "com.myhobby.gutenberglisten"
         minSdk = 26
         targetSdk = 35
         versionCode = 3

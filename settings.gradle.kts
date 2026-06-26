@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "GutenbergWebAccess"
+rootProject.name = "GutenbergListen"
 include(":app")
  
