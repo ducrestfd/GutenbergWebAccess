@@ -37,6 +37,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -52,6 +53,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.myhobby.gutenberglisten.R
 import com.myhobby.gutenberglisten.util.scaled
 
 
@@ -154,6 +156,7 @@ fun About(navController: NavController) {
         """
 
     Updates Completed:
+    • Non-dynamic UI text now in English, French, German, Spanish.
     • Files with the improper language of "English" instead of "en" now work.
     • Sleep timers have been added for text-to-speech and audio files. 
     • Choice of speaking voice has been added to text-to-speech listening.
@@ -210,7 +213,7 @@ fun About(navController: NavController) {
                     navController.popBackStack()
                 },
             ) {
-                Text("Home", fontSize = 16.sp.scaled)
+                Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -221,7 +224,7 @@ fun About(navController: NavController) {
             )
 
             Text(
-                "Release date 2026-06-26 Version 3.13",
+                "Release date 2026-07-13 Version 3.14",
                 style = TextStyle(fontSize = 12.sp.scaled, fontStyle = FontStyle.Italic, fontWeight = FontWeight.Bold)
             )
 
@@ -293,7 +296,7 @@ fun About(navController: NavController) {
                     navController.popBackStack()
                 },
             ) {
-                Text("Home", fontSize = 16.sp.scaled)
+                Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
             }
 
             Spacer(modifier = Modifier.height(48.dp))

@@ -42,9 +42,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.myhobby.gutenberglisten.Link
+import com.myhobby.gutenberglisten.R
 import com.myhobby.gutenberglisten.collectSectionHrefs
 import com.myhobby.gutenberglisten.util.scaled
 import kotlinx.coroutines.Dispatchers
@@ -178,7 +180,7 @@ fun DirectResults(
                             }
                         },
                     ) {
-                        Text(text = "Home", fontSize = 16.sp.scaled)
+                        Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
                     }
                 },
                 navigationIcon = {
@@ -200,7 +202,7 @@ fun DirectResults(
                                 contentDescription = null // The text itself provides the description
                             )
                             Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing)) // Standard spacing
-                            Text(text = "Previous", fontSize = 16.sp.scaled)
+                            Text(text = stringResource(R.string.previous), fontSize = 16.sp.scaled)
                         }
                     }
                 },
@@ -214,7 +216,7 @@ fun DirectResults(
                         enabled = !isLoading, // Disable next if currently loading
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(text = "Next", fontSize = 16.sp.scaled)
+                            Text(text = stringResource(R.string.next), fontSize = 16.sp.scaled)
                             Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing)) // Standard spacing
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowForward,

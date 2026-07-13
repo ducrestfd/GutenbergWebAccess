@@ -34,6 +34,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -43,6 +44,7 @@ import com.myhobby.gutenberglisten.NavRoutes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.myhobby.gutenberglisten.Link
+import com.myhobby.gutenberglisten.R
 import com.myhobby.gutenberglisten.collectSectionHrefs
 import com.myhobby.gutenberglisten.util.scaled
 import java.net.URLDecoder
@@ -170,7 +172,7 @@ fun BookListing(
                             }
                         },
                     ) {
-                        Text(text = "Home", fontSize = 16.sp.scaled)
+                        Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
                     }                },
                 navigationIcon = {
                     Button(
@@ -193,7 +195,7 @@ fun BookListing(
                                 contentDescription = null // The text itself provides the description
                             )
                             Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing)) // Standard spacing
-                            Text(text = "Previous", fontSize = 16.sp.scaled)
+                            Text(text = stringResource(R.string.previous), fontSize = 16.sp.scaled)
                         }
                     }
                 },
@@ -206,7 +208,7 @@ fun BookListing(
                         enabled = !isLoading, // Disable next if currently loading
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
-                            Text(text = "Next", fontSize = 16.sp.scaled)
+                            Text(text = stringResource(R.string.next), fontSize = 16.sp.scaled)
                             Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing)) // Standard spacing
                             Icon(
                                 imageVector = Icons.AutoMirrored.Filled.ArrowForward,

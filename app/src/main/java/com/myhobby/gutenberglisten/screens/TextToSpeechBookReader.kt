@@ -70,6 +70,8 @@ import org.jsoup.Jsoup
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.res.stringResource
+import com.myhobby.gutenberglisten.R
 
 
 /**
@@ -662,7 +664,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     },
                     // modifier = Modifier.semantics { contentDescription = "Back to Previous Screen" }
                 ) {
-                    Text(text = "Back", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
                 }
 
                  Spacer(modifier = Modifier.height(16.dp))
@@ -691,7 +693,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         //enabled = bookSentences.isNotEmpty()
                         enabled = isTtsInitialized && bookSentences.isNotEmpty() && !isSpeaking,
                     ) {
-                        Text(if (isPaused) "Resume" else "Play", fontSize = 16.sp.scaled)
+                        Text(if (isPaused) "Resume" else stringResource(R.string.play), fontSize = 16.sp.scaled)
                     }
 
                     Spacer(Modifier.width(16.dp))
@@ -708,7 +710,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && isSpeaking && !isPaused,
                     ) {
-                        Text("Pause", fontSize = 16.sp.scaled)
+                        Text(text = stringResource(R.string.pause), fontSize = 16.sp.scaled)
                     }
 
                     Spacer(Modifier.width(16.dp))
@@ -733,7 +735,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         enabled = isTtsInitialized && (isSpeaking || isPaused), // Enable if TTS is ready and either speaking or paused
                         // modifier = Modifier.semantics { contentDescription = "Pause Speaking and return to Beginning" }
                     ) {
-                        Text("Beginning", fontSize = 16.sp.scaled)
+                        Text(text = stringResource(R.string.beginning), fontSize = 16.sp.scaled)
                     }
                 }
 
@@ -754,7 +756,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                 }
 
                 val currentProgress = (progress * 100).toInt()
-                Text("Progress: $currentProgress%", fontSize = 16.sp.scaled)
+                Text("${stringResource(R.string.progress)}: $currentProgress%", fontSize = 16.sp.scaled)
 
                 Spacer(Modifier.height(16.dp))
 
@@ -864,7 +866,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                 Spacer(Modifier.height(16.dp))
 
                 //Text("Rate: ${String.format("%.1f", speechRate)}x")
-                Text("Rate: ${"%.1f%%".format(speechRate * 100f)}", fontSize = 16.sp.scaled)
+                Text("${stringResource(R.string.rate)} ${"%.1f%%".format(speechRate * 100f)}", fontSize = 16.sp.scaled)
 
                 Spacer(Modifier.height(16.dp))
 
@@ -886,7 +888,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && speechRate > 0.1f,
                     ) {
-                        Text("Slower", fontSize = 16.sp.scaled)
+                        Text(text = stringResource(R.string.slower), fontSize = 16.sp.scaled)
                     }
 
                     Spacer(Modifier.width(16.dp))
@@ -908,14 +910,14 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && speechRate < 3.0f,
                     ) {
-                        Text("Faster", fontSize = 16.sp.scaled)
+                        Text(text = stringResource(R.string.faster), fontSize = 16.sp.scaled)
                     }
                 }
 
                 Spacer(Modifier.height(16.dp))
 
                 if (isSleepTimerActive && sleepTimerMinutes > 0) {
-                    Text("Sleep Timer: $sleepTimerMinutes min left", fontSize = 16.sp.scaled)
+                    Text("${stringResource(R.string.sleepin)}: $sleepTimerMinutes min", fontSize = 16.sp.scaled)
                     Spacer(modifier = Modifier.height(8.dp))
                 }
 
@@ -923,7 +925,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     onClick = { showSleepTimerDialog = true },
                     enabled = isTtsInitialized
                 ) {
-                    Text("Set Sleep Timer", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.setsleeptimer), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(Modifier.height(16.dp))
@@ -932,7 +934,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     onClick = { showVoiceDialog = true },
                     enabled = isTtsInitialized && availableVoices.isNotEmpty()
                 ) {
-                    Text("Change Voice", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.changevoice), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(Modifier.height(16.dp))
@@ -941,12 +943,15 @@ fun TextToSpeechBookReader( // Renamed for clarity
                     onClick = { showEngineDialog = true },
                     enabled = isTtsInitialized && availableEngines.isNotEmpty()
                 ) {
-                    Text("Change Engine", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.changeengine), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(Modifier.height(16.dp))
 
-                Text("Pitch: ${"%.1f%%".format(speechPitch * 100f)}", fontSize = 16.sp.scaled)
+                Text(
+                    text = "${stringResource(R.string.pitch)}: ${"%.1f%%".format(speechPitch * 100f)}",
+                    fontSize = 16.sp.scaled
+                )
                 Spacer(Modifier.height(8.dp))
                 Row {
                     Button(
@@ -966,7 +971,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && speechPitch > 0.1f,
                     ) {
-                        Text("Lower", fontSize = 16.sp.scaled)
+                        Text(stringResource(R.string.lower), fontSize = 16.sp.scaled)
                     }
 
                     Spacer(Modifier.width(16.dp))
@@ -988,7 +993,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                         },
                         enabled = isTtsInitialized && speechPitch < 2.0f,
                     ) {
-                        Text("Higher", fontSize = 16.sp.scaled)
+                        Text(stringResource(R.string.higher), fontSize = 16.sp.scaled)
                     }
                 }
 
@@ -1046,7 +1051,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
     if (showSleepTimerDialog) {
         AlertDialog(
             onDismissRequest = { showSleepTimerDialog = false },
-            title = { Text("Set Sleep Timer", fontSize = 20.sp.scaled) },
+            title = { Text(text = stringResource(R.string.setsleeptimer), fontSize = 20.sp.scaled) },
             text = {
                 Column {
                     listOf(5, 10, 15, 30, 45, 60).forEach { minutes ->
@@ -1058,7 +1063,7 @@ fun TextToSpeechBookReader( // Renamed for clarity
                             },
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Text("$minutes minutes", fontSize = 16.sp.scaled)
+                            Text("$minutes ${stringResource(R.string.minutes)}", fontSize = 16.sp.scaled)
                         }
                     }
                     TextButton(

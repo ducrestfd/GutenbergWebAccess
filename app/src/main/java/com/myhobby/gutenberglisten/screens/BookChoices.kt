@@ -53,11 +53,13 @@ import android.os.Environment
 import android.provider.MediaStore
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import com.myhobby.gutenberglisten.util.getMetaTagContent
 import com.myhobby.gutenberglisten.viewmodels.OggPlaybackViewModel
 import kotlinx.coroutines.CoroutineScope
 import org.jsoup.Jsoup
 import java.io.File
+import com.myhobby.gutenberglisten.R
 
 
 /**
@@ -136,12 +138,12 @@ fun deleteBookAndRefreshMediaStore(context: Context, bookIdentifier: String): Bo
             )
             //Log.d("DeleteUtil", "MediaStore cleanup deleted $rowsDeleted rows.")
         } catch (e: Exception) {
-            Log.e("DeleteUtil", "Error updating MediaStore after deletion", e)
+            //Log.e("DeleteUtil", "Error updating MediaStore after deletion", e)
             // We don't return false here because the file IS gone from disk.
             // The worst case is a ghost entry remains, but the primary action succeeded.
         }
     } else {
-        Log.e("DeleteUtil", "Failed to delete '$bookIdentifier' from filesystem.")
+        //Log.e("DeleteUtil", "Failed to delete '$bookIdentifier' from filesystem.")
     }
 
     return wasDeletionSuccessful
@@ -349,7 +351,7 @@ fun BookChoices(navController: NavController,
                         }
                     },
                 ) {
-                    Text(text = "Home", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -359,7 +361,7 @@ fun BookChoices(navController: NavController,
                         navController.popBackStack()
                     }
                 ) {
-                    Text(text = "Back", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
                 }
 
             }
@@ -375,7 +377,7 @@ fun BookChoices(navController: NavController,
                 //    contentDescription = "Go back to the previous screen"
                 //}
             ) {
-                Text(text = "Back", fontSize = 16.sp.scaled)
+                Text(text = Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -479,7 +481,7 @@ fun BookChoices(navController: NavController,
                     },
                     // modifier = Modifier.semantics { contentDescription = "Listen to the book" },
                 ) {
-                    Text(text = "Listen", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.listen), fontSize = 16.sp.scaled)
                 }
 
                 /*
@@ -569,7 +571,7 @@ fun BookChoices(navController: NavController,
                     // modifier = Modifier.semantics {contentDescription = "Share the book as an HTML file"},
                     enabled = isOggFile == false
                 ) {
-                    Text("Share HTML File", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.sharehtmlfile), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -605,7 +607,7 @@ fun BookChoices(navController: NavController,
                     // modifier = Modifier.semantics {contentDescription = "Open book in Chrome browser"},
                     enabled = isOggFile == false
                 ) {
-                    Text(text = "Open in Chrome", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.openinchrome), fontSize = 16.sp.scaled)
                 }
 
             }
@@ -623,7 +625,7 @@ fun BookChoices(navController: NavController,
                 //    contentDescription = "Go back to the previous screen"
                 //}
             ) {
-                Text(text = "Back", fontSize = 16.sp.scaled)
+                Text(text = Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
             }
             */
 
@@ -681,7 +683,7 @@ fun BookChoices(navController: NavController,
                 },
                 // modifier = Modifier.semantics { contentDescription = "Delete the book" }
             ) {
-                Text(text = "Delete", fontSize = 16.sp.scaled)
+                Text(text = stringResource(R.string.delete), fontSize = 16.sp.scaled)
             }
         }
     }

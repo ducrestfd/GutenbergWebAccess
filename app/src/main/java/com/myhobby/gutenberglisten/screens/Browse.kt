@@ -27,12 +27,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.myhobby.gutenberglisten.NavRoutes
+import com.myhobby.gutenberglisten.R
 import com.myhobby.gutenberglisten.util.scaled
 
 
@@ -69,7 +71,7 @@ fun Browse(navController: NavController, typeOfBrowse: String?) {
             },
                 // modifier = Modifier.semantics {contentDescription = "Return to the home screen"}
             ) {
-                Text(text = "Home", fontSize = 16.sp.scaled)
+                Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
             }
 
             Spacer(modifier = Modifier.height(16.dp))

@@ -53,6 +53,8 @@ import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.res.stringResource
+import com.myhobby.gutenberglisten.R
 import kotlinx.coroutines.delay
 
 
@@ -475,12 +477,12 @@ val updateProgressRunnable: Runnable = object : Runnable {
             },
             // modifier = Modifier.semantics { contentDescription = "Back to Previous Screen" }
         ) {
-            Text(text = "Back", fontSize = 16.sp.scaled)
+            Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text("Playing: ${File(oggFilePath ?: "").name}", style = MaterialTheme.typography.titleMedium, fontSize = 14.sp.scaled)
+        Text("${File(oggFilePath ?: "").name}", style = MaterialTheme.typography.titleMedium, fontSize = 14.sp.scaled)
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -591,7 +593,8 @@ val updateProgressRunnable: Runnable = object : Runnable {
                 // modifier = Modifier.semantics { contentDescription = if (isPlaying) "Pause" else "Play" }
                 //// modifier = Modifier.semantics {contentDescription = if (isThisTheFirstTime() || isPlaying) "Pause" else "Play"}
             ) {
-                Text(if (isThisTheFirstTime() || isPlaying) "Pause" else "Play", fontSize = 16.sp.scaled)
+                Text(if (isThisTheFirstTime() || isPlaying) stringResource(R.string.pause)
+                else stringResource(R.string.play), fontSize = 16.sp.scaled)
             }
 
             // In the "Beginning" Button
@@ -614,7 +617,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
                 // modifier = Modifier.semantics { contentDescription = "Go to Beginning" }, // Changed for clarity
                 enabled = isMediaPlayerPrepared
             ) {
-                Text("Beginning", fontSize = 16.sp.scaled)
+                Text(text = stringResource(R.string.beginning), fontSize = 16.sp.scaled)
             }
 
         }
@@ -639,7 +642,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
                 // The button is enabled as long as the speed is above the minimum
                 enabled = isMediaPlayerPrepared && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && currentSpeed > 0.5f
             ) {
-                Text(text = "Slower", fontSize = 16.sp.scaled)
+                Text(text = stringResource(R.string.slower), fontSize = 16.sp.scaled)
             }
 
             // Plus Button
@@ -652,7 +655,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
                 // The button is enabled as long as the speed is below the maximum
                 enabled = isMediaPlayerPrepared && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && currentSpeed < 2.0f
             ) {
-                Text(text = "Faster", fontSize = 16.sp.scaled)
+                Text(text = stringResource(R.string.faster), fontSize = 16.sp.scaled)
             }
         }
 
@@ -666,7 +669,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
         Spacer(modifier = Modifier.height(16.dp))
 
         if (isSleepTimerActive && sleepTimerMinutes > 0) {
-            Text("Sleep Timer: $sleepTimerMinutes min left", fontSize = 16.sp.scaled)
+            Text("${stringResource(R.string.sleepin)}: $sleepTimerMinutes min", fontSize = 16.sp.scaled)
             Spacer(modifier = Modifier.height(8.dp))
         }
 
@@ -674,14 +677,14 @@ val updateProgressRunnable: Runnable = object : Runnable {
             onClick = { showSleepTimerDialog = true },
             enabled = isMediaPlayerPrepared
         ) {
-            Text("Set Sleep Timer", fontSize = 16.sp.scaled)
+            Text(text = stringResource(R.string.setsleeptimer), fontSize = 16.sp.scaled)
         }
     }
 
     if (showSleepTimerDialog) {
         AlertDialog(
             onDismissRequest = { showSleepTimerDialog = false },
-            title = { Text("Set Sleep Timer", fontSize = 20.sp.scaled) },
+            title = { Text(text = stringResource(R.string.setsleeptimer), fontSize = 20.sp.scaled) },
             text = {
                 Column {
                     listOf(5, 10, 15, 30, 45, 60).forEach { minutes ->
@@ -693,7 +696,7 @@ val updateProgressRunnable: Runnable = object : Runnable {
                             },
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Text("$minutes minutes", fontSize = 16.sp.scaled)
+                            Text("$minutes ${stringResource(R.string.minutes)}", fontSize = 16.sp.scaled)
                         }
                     }
                     TextButton(

@@ -41,6 +41,8 @@ import android.os.Environment
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
+import com.myhobby.gutenberglisten.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.myhobby.gutenberglisten.util.formatTimeMillis
@@ -169,13 +171,13 @@ fun AudioPlayList(
 
                 Row {
                     Button(onClick = { navController.navigate(NavRoutes.Home.route) }) {
-                        Text(text = "Home", fontSize = 16.sp.scaled)
+                        Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
                     }
 
                     Spacer(modifier = Modifier.width(16.dp))
 
                     Button(onClick = { navController.popBackStack() }) {
-                        Text(text = "Back", fontSize = 16.sp.scaled)
+                        Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
                     }
                 }
 
@@ -190,7 +192,7 @@ fun AudioPlayList(
                         }
                     ) {
                         Text(
-                            text = "Continue Ch. ${savedState.chapter} at $formattedPosition",
+                            text = "${stringResource(R.string.resume)} Ch. ${savedState.chapter} at $formattedPosition",
                             fontSize = 16.sp.scaled
                         )
                     }
@@ -224,7 +226,7 @@ fun AudioPlayList(
                         modifier = Modifier.height(48.dp)
                     ) {
                         Text(
-                            text = "Chapter " + item.substringBefore(".ogg").substringAfterLast("_"),
+                            text = "${stringResource(R.string.chapter)} ${item.substringBefore(".ogg").substringAfterLast("_")}",
                             fontSize = 16.sp.scaled
                         )
                     }

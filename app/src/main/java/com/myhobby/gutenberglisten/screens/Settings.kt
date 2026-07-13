@@ -172,8 +172,9 @@ fun Settings(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = "50% (Slower)")
-                Text(text = "200% (Faster)")
+
+                Text(text = "50% (stringResource(R.string.slower))")
+                Text(text = "200% (stringResource(R.string.faster))")
             }
 
             Spacer(modifier = Modifier.height(32.dp))

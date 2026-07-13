@@ -44,7 +44,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.myhobby.gutenberglisten.R
 import com.myhobby.gutenberglisten.util.scaled
 import com.myhobby.gutenberglisten.viewmodels.ScrollLocationViewModel
 import kotlinx.coroutines.Dispatchers
@@ -177,7 +179,7 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
                         }
                     },
                 ) {
-                    Text(text = "Home", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -187,7 +189,7 @@ fun SavedBooks(navController: NavController, viewModel: ScrollLocationViewModel)
                         navController.popBackStack()
                     }
                 ) {
-                    Text(text = "Back", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
                 }
 
             }

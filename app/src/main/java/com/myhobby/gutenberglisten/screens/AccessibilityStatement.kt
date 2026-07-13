@@ -12,9 +12,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.myhobby.gutenberglisten.R
 import com.myhobby.gutenberglisten.util.HtmlText
 import com.myhobby.gutenberglisten.util.scaled
 
@@ -95,7 +97,7 @@ suggestions for improvement, please contact us:</font></p>
                     navController.popBackStack()
                 },
             ) {
-                Text(text = "Home", fontSize = 16.sp.scaled)
+                Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
             }
 
             Spacer(modifier = Modifier.height(16.dp))

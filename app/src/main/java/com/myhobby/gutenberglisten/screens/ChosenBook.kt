@@ -56,11 +56,11 @@ import kotlinx.coroutines.launch
 import java.net.URLDecoder
 import java.nio.charset.StandardCharsets
 import android.os.Build
+import androidx.compose.ui.res.stringResource
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
-
-
+import com.myhobby.gutenberglisten.R
 
 
 /**
@@ -370,7 +370,7 @@ fun ChosenBook(
                         }
                     },
                 ) {
-                    Text(text = "Home", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -380,7 +380,7 @@ fun ChosenBook(
                         navController.popBackStack()
                     }
                 ) {
-                    Text(text = "Back", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
                 }
 
             }
@@ -404,7 +404,7 @@ fun ChosenBook(
                         }
                     },
                 ) {
-                    Text(text = "Home", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -414,7 +414,7 @@ fun ChosenBook(
                         navController.popBackStack()
                     },
                 ) {
-                    Text(text = "Back", fontSize = 16.sp.scaled)
+                    Text(text = Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -426,7 +426,7 @@ fun ChosenBook(
                         }
                     },
                 ) {
-                    Text(text = "Saved Books", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.savedbook), fontSize = 16.sp.scaled)
                 }
             //}
 

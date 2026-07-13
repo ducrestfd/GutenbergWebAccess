@@ -31,6 +31,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -41,6 +42,7 @@ import com.myhobby.gutenberglisten.collectCategoryHrefs
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import com.myhobby.gutenberglisten.Link
+import com.myhobby.gutenberglisten.R
 import com.myhobby.gutenberglisten.util.scaled
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
@@ -135,7 +137,7 @@ fun BrowseSection(navController: NavController, typeOfBrowse: String?, subSectio
                     },
                     // modifier = Modifier.semantics {contentDescription = "Return to Home Screen"}
                 ) {
-                    Text(text = "Home", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -147,7 +149,7 @@ fun BrowseSection(navController: NavController, typeOfBrowse: String?, subSectio
                     },
                     // modifier = Modifier.semantics {contentDescription = "Back to Previous Screen"}
                 ) {
-                    Text(text = "Back", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
                 }
             }
 

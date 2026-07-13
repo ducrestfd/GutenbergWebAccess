@@ -1,3 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Gutenberg Listen</string>
+    <string name="app_name" translatable="false">Gutenberg Listen</string>
+    <string name="savedbook">Saved Books</string>
+    <string name="entersearchterm">Enter Search Term</string>
+    <string name="search">Search</string>
+    <string name="searchsorttitle">Search &amp; Sort by Title</string>
+    <string name="searchsortrelease">Search &amp; Sort by Release date</string>
+    <string name="browsepopularity">Browse by popularity</string>
+    <string name="browsetitle">Browse by title</string>
+    <string name="browseauthor">Browse by author</string>
+    <string name="browserelease">Browse by release date</string>
+    <string name="about">About</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="home">Home</string>
+    <string name="back">Back</string>
+    <string name="listen">Listen</string>
+    <string name="sharehtmlfile">Share HTML file</string>
+    <string name="openinchrome">Open in Chrome</string>
+    <string name="delete">Delete</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="beginning">Beginning</string>
+    <string name="progress">Progress</string>
+    <string name="rate">Rate</string>
+    <string name="slower">Slower</string>
+    <string name="faster">Faster</string>
+    <string name="setsleeptimer">Set Sleep Timer</string>
+    <string name="changevoice">Change Voice</string>
+    <string name="changeengine">Change Engine</string>
+    <string name="pitch">Pitch</string>
+    <string name="lower">Lower</string>
+    <string name="higher">Higher</string>
+    <string name="minutes">minutes</string>
+    <string name="sleepin">Sleep in</string>
+    <string name="chapter">Chapter</string>
 </resources>

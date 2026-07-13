@@ -50,6 +50,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
@@ -364,7 +365,7 @@ fun ChosenAudioBook(
                         navController.popBackStack()
                     }
                 ) {
-                    Text(text = "Back", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -376,7 +377,7 @@ fun ChosenAudioBook(
                         }
                     },
                 ) {
-                    Text(text = "Home", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
                 }
             }
 
@@ -398,7 +399,7 @@ fun ChosenAudioBook(
                         }
                     },
                 ) {
-                    Text(text = "Home", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.home), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -408,7 +409,7 @@ fun ChosenAudioBook(
                         navController.popBackStack()
                     },
                 ) {
-                    Text(text = "Back", fontSize = 16.sp.scaled)
+                    Text(text = Text(text = stringResource(R.string.back), fontSize = 16.sp.scaled)
                 }
 
                 Spacer(modifier = Modifier.width(16.dp))
@@ -420,7 +421,7 @@ fun ChosenAudioBook(
                         }
                     },
                 ) {
-                    Text(text = "Saved Books", fontSize = 16.sp.scaled)
+                    Text(text = stringResource(R.string.savedbook), fontSize = 16.sp.scaled)
                 }
             //}
 
