@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="savedbook">Livres</string>
+    <string name="entersearchterm">Terme Recherché</string>
+    <string name="search">Recherche</string>
+    <string name="searchsorttitle">Tri par Titres</string>
+    <string name="searchsortrelease">tri par date ajout</string>
+    <string name="browsepopularity">tri par popularité</string>
+    <string name="browsetitle">prcourir par titres</string>
+    <string name="browseauthor">parcourir par auteur</string>
+    <string name="browserelease">parcourir par date ajout</string>
+    <string name="about">A propos</string>
+    <string name="previous">Précédent</string>
+    <string name="next">Suivant</string>
+    <string name="home">Accueil</string>
+    <string name="back">Retour</string>
+    <string name="listen">écouter</string>
+    <string name="sharehtmlfile">Partager fichier HTML</string>
+    <string name="openinchrome">Ouvrir dans Chrome</string>
+    <string name="delete">Effacer</string>
+    <string name="play">Lecture</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Continuer</string>
+    <string name="beginning">Début</string>
+    <string name="progress">Progression</string>
+    <string name="rate">Vitesse</string>
+    <string name="slower">Plus lent</string>
+    <string name="faster">Plus rapide</string>
+    <string name="setsleeptimer">Mise en Veille</string>
+    <string name="changevoice">Changer de voix</string>
+    <string name="changeengine">Changer de moteur</string>
+    <string name="pitch">Hauteur de ton</string>
+    <string name="lower">Plus grave</string>
+    <string name="higher">Plus aigu</string>
+    <string name="minutes">minutes</string>
+    <string name="sleepin">S\'endormir en</string>
+    <string name="chapter">Chapitre</string>
+</resources>

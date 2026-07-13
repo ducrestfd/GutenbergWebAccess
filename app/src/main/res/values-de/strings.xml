@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="savedbook">Buchen</string>
+    <string name="entersearchterm">Suchbegriff</string>
+    <string name="search">Suche</string>
+    <string name="searchsorttitle">Nach Titel Sortieren</string>
+    <string name="searchsortrelease">Veröffentlichungsdatum</string>
+    <string name="browsepopularity">nach Beliebtheit</string>
+    <string name="browsetitle">nach Titel durchsuchen</string>
+    <string name="browseauthor">nach Autoren</string>
+    <string name="browserelease">nach Veröffentlichungsdatum</string>
+    <string name="about">Über</string>
+    <string name="previous">Vorher</string>
+    <string name="next">Nächste</string>
+    <string name="home">Startseite</string>
+    <string name="back">Zurück</string>
+    <string name="listen">Hören</string>
+    <string name="sharehtmlfile">HTML-Datei teilen</string>
+    <string name="openinchrome">In Chrome öffnen</string>
+    <string name="delete">Löschen</string>
+    <string name="play">Wiedergabe</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Fortsetzen</string>
+    <string name="beginning">Start</string>
+    <string name="progress">Fortschritt</string>
+    <string name="rate">Geschwindigkeit</string>
+    <string name="slower">Langsamer</string>
+    <string name="faster">Schneller</string>
+    <string name="setsleeptimer">Timer einstellen</string>
+    <string name="changevoice">Stimme ändern</string>
+    <string name="changeengine">Sprach-Engine ändern</string>
+    <string name="pitch">Tonhöhe</string>
+    <string name="lower">Tiefer</string>
+    <string name="higher">Höher</string>
+    <string name="minutes">minuten</string>
+    <string name="sleepin">Einschlafen</string>
+    <string name="chapter">Kapitel</string>
+</resources>
